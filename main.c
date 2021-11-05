@@ -6,42 +6,11 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/04 08:56:06 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/04 22:09:39 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include <math.h>
-#include <sys/types.h> // open
-#include <sys/stat.h> // open
-#include <fcntl.h>  // open
-#include <unistd.h> // read, write, close
-#include <stdlib.h> // malloc, free, exit
-#include <stdio.h> // perror
-#include <string.h> // strerror
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-enum COLORS{
-	BLACK = 0x00000000,
-	WHITE = 0x00FFFFFF,
-	RED = 0x00FF0000,
-	LIME = 0x0000FF00,
-	BLUE = 0x000000FF,
-	YELLOW = 0x00FFF000,
-	CYAN = 0x0000FFFF,
-	FUCHSIA = 0x00FF00FF,
-	SILVER = 0x00C0C0C0,
-	GREEN = 0x00008000,
-	PURPLE = 0x00800080,
-	TEAL = 0x0008080
-};
+#include "libfdf.h" 
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -178,17 +147,43 @@ void	bresenham_y(t_data *img, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
-void	str_line(t_data *img, int x1, int y1, int x2, int y2, int color)
+void	strline(t_data *img, int x1, int y1, int x2, int y2, int color)
+{
+	if(x1 == x2)
+	{
+		while (y1 <= y2)
+		{
+			my_mlx_pixel_put(img, x1, y1, color);
+			y1++;
+		}
+	}
+	else if(y1 == y2)
+	{
+		while (x1 <= x2)
+		{
+			my_mlx_pixel_put(img, x1, y1, color);
+			x1++;
+		}
+	}
+}
+
+void	line(t_data *img, int x1, int y1, int x2, int y2, int color)
 {
 	if (fabs(x1 - x2) >= fabs(y1 - y2))
 	{
 		set_right_direction(&x1, &y1, &x2, &y2);
-		bresenham_x(img, x1, y1, x2, y2, color);
+		if(y1 == y2)
+			strline(img, x1, y1, x2, y2, color);
+		else
+			bresenham_x(img, x1, y1, x2, y2, color);
 	}
 	else
 	{
 		set_down_direction(&x1, &y1, &x2, &y2);
-		bresenham_y(img, x1, y1, x2, y2, color);
+		if(x1 == x2)
+			strline(img, x1, y1, x2, y2, color);
+		else
+			bresenham_y(img, x1, y1, x2, y2, color);
 	}
 }
 
@@ -220,19 +215,22 @@ int	main(void)
 	f_sqr(&img, 0, 240, 15, 255, BLUE ); // +Y
 	f_sqr(&img, 240, 240, 255, 255, SILVER ); // XY
 	// lines
-	str_line(&img, 10,  10, 10,  250,  WHITE ); // VERTICAL
-	str_line(&img, 20, 250, 20,  20,  RED ); // VERTICAL
-	str_line(&img, 30,  30, 250,  30, BLUE ); // HORIZONTAL
-	str_line(&img, 250, 40, 40,  40, YELLOW ); // HORIZONTAL
-	str_line(&img, 50,  50, 120, 120,  CYAN );
-	str_line(&img, 260, 260,120, 120,  FUCHSIA );
-	str_line(&img, 60,  230, 230, 70,  SILVER );
-	str_line(&img, 220, 80, 80,  220,  GREEN );
-	str_line(&img, 10,  250,200, 0,   PURPLE );
-	str_line(&img, 250, 10, 140, 140, TEAL );
-	str_line(&img, 120, 140,140, 10,  WHITE );
-	str_line(&img, 10,  10, 50,  250, RED );
-	str_line(&img, 10,  10, 250, 10,  BLUE );
+	line(&img, 10,  10, 10,  250,  WHITE ); // VERTICAL
+	line(&img, 20, 250, 20,  20,  RED ); // VERTICAL
+	line(&img, 30,  30, 250,  30, BLUE ); // HORIZONTAL
+	line(&img, 250, 40, 40,  40, YELLOW ); // HORIZONTAL
+	line(&img, 50,  50, 120, 120,  CYAN );
+	line(&img, 260, 260,120, 120,  FUCHSIA );
+	line(&img, 60,  230, 230, 70,  SILVER );
+	line(&img, 220, 80, 80,  220,  GREEN );
+	line(&img, 10,  250,200, 0,   PURPLE );
+	line(&img, 250, 10, 140, 140, TEAL );
+	line(&img, 120, 140,140, 10,  WHITE );
+	line(&img, 10,  10, 50,  250, RED );
+	line(&img, 10,  10, 250, 10,  BLUE );
+
+	// int matrix[3][3] = { { 0, 0, 0}, { 0, 0, 0 } };
+
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
 	mlx_loop(mlx);
