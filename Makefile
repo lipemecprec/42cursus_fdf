@@ -1,14 +1,16 @@
 CC=gcc
 NAME=fdf.a
 FLAGS=-Wall -Wextra -Werror
-INCLUDE=-I/usr/include -Imlx_linux -O3
+
+LIB_PATH = ./include
+INCLUDE=-I/usr/include -Imlx_linux -I ${LIB_PATH} -O3
 LIBS=-Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 # LIBS=-Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+.o.c:
+	${CC} -c ${FLAGS} $< -o ${<:.c=.o} ${INCLUDE}
 
 $(NAME): $(OBJ) main.c
-	$(CC) main.c $(LIBS) -o $(NAME) && ./$(NAME)
+	$(CC) main.c $(LIBS) ${INCLUDE} -o $(NAME) && ./$(NAME)
