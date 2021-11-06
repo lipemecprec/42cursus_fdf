@@ -6,15 +6,15 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:08:17 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 18:06:01 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:29:46 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-static void	set_right_direction(int *x1, int *y1, int *x2, int *y2)
+static void set_right_direction(int *x1, int *y1, int *x2, int *y2)
 {
-	int	temp;
+	int temp;
 
 	if (*x1 > *x2)
 	{
@@ -27,9 +27,9 @@ static void	set_right_direction(int *x1, int *y1, int *x2, int *y2)
 	}
 }
 
-static void	set_down_direction(int *x1, int *y1, int *x2, int *y2)
+static void set_down_direction(int *x1, int *y1, int *x2, int *y2)
 {
-	int	temp;
+	int temp;
 
 	if (*y1 > *y2)
 	{
@@ -42,15 +42,15 @@ static void	set_down_direction(int *x1, int *y1, int *x2, int *y2)
 	}
 }
 
-static void	bresenham_x(t_data *img, int x1, int y1, int x2, int y2, int color)
+static void	bresenham_x(t_data *img, t_pair p)
 {
 	int	ddx;
 	int	ddy;
 	int	yinc;
 	int	pz;
 
-	ddx = 2 * (x2 - x1);
-	ddy = 2 * (y2 - y1);
+	ddx = 2 * (p.end.x - p.bgn.x);
+	ddy = 2 * (p.end.y - p.bgn.y);
 	yinc = 1;
 	if (ddy < 0)
 	{
@@ -58,28 +58,28 @@ static void	bresenham_x(t_data *img, int x1, int y1, int x2, int y2, int color)
 		ddy = -ddy;
 	}
 	pz = ddy - (ddx / 2);
-	while (x1++ <= x2)
+	while (p.bgn.x++ <= p.end.x)
 	{
-		ft_putpxl(img, x1, y1, color);
+		ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
 		if (pz > 0)
 		{
 			pz = pz - ddx + ddy;
-			y1 += yinc;
+			p.bgn.y += yinc;
 		}
 		else
 			pz = pz + ddy;
 	}
 }
 
-static void	bresenham_y(t_data *img, int x1, int y1, int x2, int y2, int color)
+static void	bresenham_y(t_data *img, t_pair p)
 {
 	int	ddx;
 	int	ddy;
 	int	xinc;
 	int	pz;
 
-	ddx = 2 * (x2 - x1);
-	ddy = 2 * (y2 - y1);
+	ddx = 2 * (p.end.x - p.bgn.x);
+	ddy = 2 * (p.end.y - p.bgn.y);
 	xinc = 1;
 	if (ddx < 0)
 	{
@@ -87,55 +87,55 @@ static void	bresenham_y(t_data *img, int x1, int y1, int x2, int y2, int color)
 		xinc = -xinc;
 	}
 	pz = ddy - (ddx / 2);
-	while (y1++ <= y2)
+	while (p.bgn.y++ <= p.end.y)
 	{
-		ft_putpxl(img, x1, y1, color);
+		ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
 		if (pz > 0)
 		{
 			pz = pz - ddy + ddx;
-			x1 += xinc;
+			p.bgn.x += xinc;
 		}
 		else
 			pz = pz + ddx;
 	}
 }
 
-static void	strline(t_data *img, int x1, int y1, int x2, int y2, int color)
+static void	strline(t_data *img, t_pair p)
 {
-	if (x1 == x2)
+	if (p.bgn.x == p.end.x)
 	{
-		while (y1 <= y2)
+		while (p.bgn.y <= p.end.y)
 		{
-			ft_putpxl(img, x1, y1, color);
-			y1++;
+			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
+			p.bgn.y++;
 		}
 	}
-	else if (y1 == y2)
+	else if (p.bgn.y == p.end.y)
 	{
-		while (x1 <= x2)
+		while (p.bgn.x <= p.end.x)
 		{
-			ft_putpxl(img, x1, y1, color);
-			x1++;
+			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
+			p.bgn.x++;
 		}
 	}
 }
 
-void	ft_line(t_data *img, int x1, int y1, int x2, int y2, int color)
+void	ft_line(t_data *img, t_pair p)
 {
-	if (fabs((double)(x1 - x2)) >= fabs((double)(y1 - y2)))
+	if (fabs((double)(p.bgn.x - p.end.x)) >= fabs((double)(p.bgn.y - p.end.y)))
 	{
-		set_right_direction(&x1, &y1, &x2, &y2);
-		if (y1 == y2)
-			strline(img, x1, y1, x2, y2, color);
+		set_right_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
+		if (p.bgn.y == p.end.y)
+			strline(img, p);
 		else
-			bresenham_x(img, x1, y1, x2, y2, color);
+			bresenham_x(img, p);
 	}
 	else
 	{
-		set_down_direction(&x1, &y1, &x2, &y2);
-		if (x1 == x2)
-			strline(img, x1, y1, x2, y2, color);
+		set_down_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
+		if (p.bgn.x == p.end.x)
+			strline(img, p);
 		else
-			bresenham_y(img, x1, y1, x2, y2, color);
+			bresenham_y(img, p);
 	}
 }
