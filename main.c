@@ -6,16 +6,13 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 21:34:24 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:17:57 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h" 
 
-// void	f_sqr(t_data *img, t_pair p)
-// {
-// 	ft_line(img, p);
-// }
+ 
 
 void	e_sqr(t_data *img, t_pair p)
 {
@@ -34,29 +31,44 @@ void	e_sqr(t_data *img, t_pair p)
 	ft_line(img, rgt);
 }
 
-void	ft_grid(t_data *img, int w, int h, int d)
+t_coord	ft_rotate(t_angle ang, t_coord p)
 {
-	int w0;
+	t_coord rotated;
+
+	rotated.x = (int)(p.x * ang.cos + p.y * ang.sin);
+	rotated.y = (int)(-p.x * ang.sin + p.y * ang.cos);
+	return (rotated);
+}
+
+void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
+{
+	int y0;
+	t_coord	bgn;
+	t_coord	end;
 	t_pair	line;
 
-	while (h >= 0)
+	while (v.bgn.x <= v.end.x)
 	{
-		w0 = w;
-		while (w0 >= 0)
+		y0 = v.bgn.y;
+		while (y0 <= v.end.y)
 		{
-			if (w0 > 0)
+			if (y0 < v.end.y)
 			{
-				line = new_pair(new_coord(h, w0, 0), new_coord(h, w0 - d, 0), FUCHSIA);
+				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0 , 0));
+				end = ft_rotate(ang, new_coord(v.bgn.x, y0 + d, 0));
+				line = new_pair(bgn, end, FUCHSIA);
 				ft_line(img, line);
 			}
-			if (h > 0)
+			if (v.bgn.x < v.end.x)
 			{
-				line = new_pair(new_coord(h, w0, 0), new_coord(h - d, w0, 0), BLUE);
+				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0, 0));
+				end = ft_rotate(ang, new_coord(v.bgn.x + d, y0, 0));
+				line = new_pair(bgn, end, BLUE);
 				ft_line(img, line);
 			}
-			w0 -= d;
+			y0 += d;
 		}
-		h -= d;
+		v.bgn.x += d;
 	}
 }
 
@@ -68,6 +80,7 @@ int	main(void)
 	t_pair	line;
 	t_coord	bgn;
 	t_coord	end;
+	t_angle ang;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 256, 256, "fdf");
@@ -78,7 +91,14 @@ int	main(void)
 	end = new_coord(40, 40, 0);
 	line = new_pair(bgn, end, TEAL);
 	e_sqr(&img, line);
-	ft_grid(&img, 250, 250, 10);
+	ang = new_angle(45);
+	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
+	ang = new_angle(0);
+	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
+	ang = new_angle(30);
+	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
+	ang = new_angle(-30);
+	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
 	e_sqr(&img, new_pair(new_coord(0, 0, 0), new_coord(15, 15, 0), SILVER));
 	e_sqr(&img, new_pair(new_coord(240, 0, 0), new_coord(255, 15, 0), BLUE));
 	e_sqr(&img, new_pair(new_coord(0, 240, 0), new_coord(15, 255, 0), PURPLE));

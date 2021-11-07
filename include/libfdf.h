@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 22:56:38 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:47:28 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <stdio.h> // perror
 # include <string.h> // strerror
+
+# define PI 3.14159265
 
 typedef struct s_data {
 	void	*img;
@@ -44,6 +46,14 @@ typedef struct s_pair {
 	int		color;
 }				t_pair;
 
+typedef struct s_angle {
+	double	deg;
+	double	rad;
+	double	sin;
+	double	cos;
+	double	tan;
+}				t_angle;
+
 enum e_colors{
 	BLACK = 0x00000000,
 	WHITE = 0x00FFFFFF,
@@ -62,6 +72,7 @@ enum e_colors{
 void	ft_putpxl(t_data *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);
+t_angle	new_angle(double deg);
 void	ft_line(t_data *img, t_pair p);
 void	ft_strline(t_data *img, t_pair p);
 
