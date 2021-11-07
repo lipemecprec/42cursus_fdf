@@ -8,9 +8,11 @@ LIBS = -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 INCLUDE = -I/usr/include -Imlx_linux -I $(LIB_PATH) -O3
 
 SRCS_PATH = ./srcs
-SRCS = $(SRCS_PATH)/ft_putpxl.c \
+SRCS = \
 		$(SRCS_PATH)/constructors.c \
 		$(SRCS_PATH)/ft_line.c \
+		$(SRCS_PATH)/ft_putpxl.c \
+		$(SRCS_PATH)/ft_strline.c \
 
 OBJS = $(SRCS:%.c=%.o)
 

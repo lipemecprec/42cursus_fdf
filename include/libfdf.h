@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 18:28:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/06 22:56:38 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	ft_putpxl(t_data *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);
 void	ft_line(t_data *img, t_pair p);
+void	ft_strline(t_data *img, t_pair p);
 
 #endif

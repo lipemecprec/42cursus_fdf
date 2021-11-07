@@ -6,15 +6,15 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:08:17 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 18:29:46 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/06 22:57:54 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-static void set_right_direction(int *x1, int *y1, int *x2, int *y2)
+static void	set_right_direction(int *x1, int *y1, int *x2, int *y2)
 {
-	int temp;
+	int	temp;
 
 	if (*x1 > *x2)
 	{
@@ -27,9 +27,9 @@ static void set_right_direction(int *x1, int *y1, int *x2, int *y2)
 	}
 }
 
-static void set_down_direction(int *x1, int *y1, int *x2, int *y2)
+static void	set_down_direction(int *x1, int *y1, int *x2, int *y2)
 {
-	int temp;
+	int	temp;
 
 	if (*y1 > *y2)
 	{
@@ -100,33 +100,13 @@ static void	bresenham_y(t_data *img, t_pair p)
 	}
 }
 
-static void	strline(t_data *img, t_pair p)
-{
-	if (p.bgn.x == p.end.x)
-	{
-		while (p.bgn.y <= p.end.y)
-		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.y++;
-		}
-	}
-	else if (p.bgn.y == p.end.y)
-	{
-		while (p.bgn.x <= p.end.x)
-		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.x++;
-		}
-	}
-}
-
 void	ft_line(t_data *img, t_pair p)
 {
 	if (fabs((double)(p.bgn.x - p.end.x)) >= fabs((double)(p.bgn.y - p.end.y)))
 	{
 		set_right_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
 		if (p.bgn.y == p.end.y)
-			strline(img, p);
+			ft_strline(img, p);
 		else
 			bresenham_x(img, p);
 	}
@@ -134,7 +114,7 @@ void	ft_line(t_data *img, t_pair p)
 	{
 		set_down_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
 		if (p.bgn.x == p.end.x)
-			strline(img, p);
+			ft_strline(img, p);
 		else
 			bresenham_y(img, p);
 	}

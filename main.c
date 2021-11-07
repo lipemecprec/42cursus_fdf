@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 18:43:32 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/06 21:34:24 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,32 @@ void	e_sqr(t_data *img, t_pair p)
 	ft_line(img, rgt);
 }
 
+void	ft_grid(t_data *img, int w, int h, int d)
+{
+	int w0;
+	t_pair	line;
+
+	while (h >= 0)
+	{
+		w0 = w;
+		while (w0 >= 0)
+		{
+			if (w0 > 0)
+			{
+				line = new_pair(new_coord(h, w0, 0), new_coord(h, w0 - d, 0), FUCHSIA);
+				ft_line(img, line);
+			}
+			if (h > 0)
+			{
+				line = new_pair(new_coord(h, w0, 0), new_coord(h - d, w0, 0), BLUE);
+				ft_line(img, line);
+			}
+			w0 -= d;
+		}
+		h -= d;
+	}
+}
+
 int	main(void)
 {
 	void	*mlx;
@@ -52,11 +78,11 @@ int	main(void)
 	end = new_coord(40, 40, 0);
 	line = new_pair(bgn, end, TEAL);
 	e_sqr(&img, line);
+	ft_grid(&img, 250, 250, 10);
 	e_sqr(&img, new_pair(new_coord(0, 0, 0), new_coord(15, 15, 0), SILVER));
 	e_sqr(&img, new_pair(new_coord(240, 0, 0), new_coord(255, 15, 0), BLUE));
 	e_sqr(&img, new_pair(new_coord(0, 240, 0), new_coord(15, 255, 0), PURPLE));
 	e_sqr(&img, new_pair(new_coord(240, 240, 0), new_coord(255, 255, 0), TEAL));
-
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
 	mlx_loop(mlx);
