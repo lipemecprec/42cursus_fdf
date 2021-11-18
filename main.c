@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/07 16:17:57 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/07 23:13:34 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_coord	ft_rotate(t_angle ang, t_coord p)
 {
 	t_coord rotated;
 
-	rotated.x = (int)(p.x * ang.cos + p.y * ang.sin);
-	rotated.y = (int)(-p.x * ang.sin + p.y * ang.cos);
+	rotated.x = (int)(floor(p.x * ang.cos) + floor(p.y * ang.sin));
+	rotated.y = (int)(floor(-p.x * ang.sin) + floor(p.y * ang.cos));
 	return (rotated);
 }
 
@@ -56,14 +56,14 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 			{
 				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0 , 0));
 				end = ft_rotate(ang, new_coord(v.bgn.x, y0 + d, 0));
-				line = new_pair(bgn, end, FUCHSIA);
+				line = new_pair(bgn, end, LIME);
 				ft_line(img, line);
 			}
 			if (v.bgn.x < v.end.x)
 			{
 				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0, 0));
 				end = ft_rotate(ang, new_coord(v.bgn.x + d, y0, 0));
-				line = new_pair(bgn, end, BLUE);
+				line = new_pair(bgn, end, LIME);
 				ft_line(img, line);
 			}
 			y0 += d;
@@ -92,13 +92,7 @@ int	main(void)
 	line = new_pair(bgn, end, TEAL);
 	e_sqr(&img, line);
 	ang = new_angle(45);
-	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
-	ang = new_angle(0);
-	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
-	ang = new_angle(30);
-	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
-	ang = new_angle(-30);
-	ft_grid(&img, new_pair(new_coord(130, 150, 0), new_coord(150, 180, 0), FUCHSIA), ang, 10);
+	ft_grid(&img, new_pair(new_coord(-70, 110, 0), new_coord(90, 250, 0), FUCHSIA), ang, 20);
 	e_sqr(&img, new_pair(new_coord(0, 0, 0), new_coord(15, 15, 0), SILVER));
 	e_sqr(&img, new_pair(new_coord(240, 0, 0), new_coord(255, 15, 0), BLUE));
 	e_sqr(&img, new_pair(new_coord(0, 240, 0), new_coord(15, 255, 0), PURPLE));
