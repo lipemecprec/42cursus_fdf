@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/07 23:13:34 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/20 21:12:47 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 	t_coord	bgn;
 	t_coord	end;
 	t_pair	line;
+	t_angle persp = new_angle(30);
 
 	while (v.bgn.x <= v.end.x)
 	{
@@ -56,6 +57,10 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 			{
 				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0 , 0));
 				end = ft_rotate(ang, new_coord(v.bgn.x, y0 + d, 0));
+				// line = new_pair(bgn, end, GREY);
+				// ft_line(img, line);
+				bgn = new_proj(bgn.x, bgn.y, bgn.z, persp);
+				end = new_proj(end.x, end.y, end.z, persp);
 				line = new_pair(bgn, end, LIME);
 				ft_line(img, line);
 			}
@@ -63,6 +68,10 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 			{
 				bgn = ft_rotate(ang, new_coord(v.bgn.x, y0, 0));
 				end = ft_rotate(ang, new_coord(v.bgn.x + d, y0, 0));
+				// line = new_pair(bgn, end, GREY);
+				// ft_line(img, line);
+				bgn = new_proj(bgn.x, bgn.y, bgn.z, persp);
+				end = new_proj(end.x, end.y, end.z, persp);
 				line = new_pair(bgn, end, LIME);
 				ft_line(img, line);
 			}
@@ -101,4 +110,7 @@ int	main(void)
 
 	mlx_loop(mlx);
 	exit(0);
+	// mlx_clear_window(&mlx, &mlx_win);
+	// mlx_destroy_window(&mlx, &mlx_win);
 }
+ 

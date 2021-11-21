@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/07 14:47:28 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/20 20:53:00 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct s_coord {
 	int	z;
 }				t_coord;
 
+typedef struct s_proj {
+	int	x;
+	int	y;
+}				t_proj;
+
 typedef struct s_pair {
 	t_coord	bgn;
 	t_coord	end;
@@ -64,6 +69,7 @@ enum e_colors{
 	CYAN = 0x0000FFFF,
 	FUCHSIA = 0x00FF00FF,
 	SILVER = 0x00C0C0C0,
+	GREY = 0x00333333,
 	GREEN = 0x00008000,
 	PURPLE = 0x00800080,
 	TEAL = 0x0008080
@@ -73,6 +79,7 @@ void	ft_putpxl(t_data *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);
 t_angle	new_angle(double deg);
+t_coord new_proj(int x, int y, int z, t_angle a);
 void	ft_line(t_data *img, t_pair p);
 void	ft_strline(t_data *img, t_pair p);
 

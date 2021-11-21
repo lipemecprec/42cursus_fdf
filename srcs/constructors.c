@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:01:40 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/07 14:37:48 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/20 20:48:24 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ t_coord	new_coord(int x, int y, int z)
 	coord.y = y;
 	coord.z = z;
 	return (coord);
+}
+
+t_coord new_proj(int x, int y, int z, t_angle a)
+{
+	t_coord p;
+
+	p.x = x;
+	p.y = y * a.tan + z;
+	p.z = 0;
+	return (p);
 }
 
 t_pair	new_pair(t_coord bgn, t_coord end, int color)
