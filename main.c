@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/20 21:12:47 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/22 00:33:23 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 	t_coord	bgn;
 	t_coord	end;
 	t_pair	line;
-	t_angle persp = new_angle(30);
+	t_angle persp = new_angle(15);
 
 	while (v.bgn.x <= v.end.x)
 	{
@@ -81,21 +81,30 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 	}
 }
 
+int	handle_key(int key, void *data)
+{
+	printf("%d", key);
+	return (0);
+}
+
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	t_pair	line;
-	t_coord	bgn;
-	t_coord	end;
-	t_angle ang;
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img;
+	t_wireframe	*data;
+	t_pair		line;
+	t_coord		bgn;
+	t_coord		end;
+	t_angle		ang;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 256, 256, "fdf");
 	img.img = mlx_new_image(mlx, 256, 256);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
+	data = (t_wireframe *)malloc(sizeof(t_wireframe));
+	// ft_read_wireframe(data);
 	bgn = new_coord(20, 20, 0);
 	end = new_coord(40, 40, 0);
 	line = new_pair(bgn, end, TEAL);
