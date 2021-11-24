@@ -6,13 +6,11 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/22 00:33:23 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/22 22:05:22 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h" 
-
- 
 
 void	e_sqr(t_data *img, t_pair p)
 {
@@ -81,13 +79,13 @@ void	ft_grid(t_data *img, t_pair v, t_angle ang, int d)
 	}
 }
 
-int	handle_key(int key, void *data)
-{
-	printf("%d", key);
-	return (0);
-}
+// int	handle_key(int key, void *data)
+// {
+// 	printf("%d", key);
+// 	return (0);
+// }
 
-int	main(void)
+int	main(int argc, char** argv)
 {
 	void		*mlx;
 	void		*mlx_win;
@@ -103,8 +101,6 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 256, 256);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	data = (t_wireframe *)malloc(sizeof(t_wireframe));
-	// ft_read_wireframe(data);
 	bgn = new_coord(20, 20, 0);
 	end = new_coord(40, 40, 0);
 	line = new_pair(bgn, end, TEAL);
@@ -118,8 +114,26 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
 	mlx_loop(mlx);
-	exit(0);
+	argc = 0;
 	// mlx_clear_window(&mlx, &mlx_win);
 	// mlx_destroy_window(&mlx, &mlx_win);
+
+	data = (t_wireframe *)malloc(sizeof(t_wireframe));
+	ft_read_wireframe(argv[1], data);
+
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			printf("%d", data->z_grid[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
  

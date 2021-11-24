@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 01:06:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/08/21 11:15:07 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:30:26 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
+	if (!dst || !src)
+		return (0);
 	i = 0;
 	if (dstsize > 0)
 	{

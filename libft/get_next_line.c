@@ -6,11 +6,11 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/22 00:15:37 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:35:02 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static char	*get_line(char **st_buf, char **line)
 {

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/21 19:35:01 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:51:03 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define LIBFDF_H
 
 # include "mlx.h"
-# include "libft.h"
+# include "../libft/libft.h"
 # include <math.h>
 # include <sys/types.h> // open
 # include <sys/stat.h> // open
@@ -61,8 +61,8 @@ typedef struct s_angle {
 }				t_angle;
 
 typedef struct s_wireframe {
-	int	w;
-	int	h;
+	int	height;
+	int	width;
 	int	**z_grid;
 }				t_wireframe;
 
@@ -82,6 +82,7 @@ enum e_colors{
 	TEAL = 0x0008080
 };
 
+int		ft_read_wireframe(char *file, t_wireframe *data);
 void	ft_putpxl(t_data *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);

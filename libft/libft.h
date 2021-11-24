@@ -6,9 +6,17 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 23:16:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/03 20:36:47 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/23 22:36:58 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef OPEN_MAX
+# define OPEN_MAX 256
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 32
+#endif
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -179,5 +187,6 @@ element if needed.
 \param (*del)  The adress of the function used to delete the content of an
 element if needed. */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*get_next_line(int fd);
 
 #endif
