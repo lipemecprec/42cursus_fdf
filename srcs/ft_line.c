@@ -6,15 +6,15 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:08:17 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/06 22:57:54 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/24 16:47:05 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-static void	set_right_direction(int *x1, int *y1, int *x2, int *y2)
+static void	set_right_direction(float *x1, float *y1, float *x2, float *y2)
 {
-	int	temp;
+	float	temp;
 
 	if (*x1 > *x2)
 	{
@@ -27,9 +27,9 @@ static void	set_right_direction(int *x1, int *y1, int *x2, int *y2)
 	}
 }
 
-static void	set_down_direction(int *x1, int *y1, int *x2, int *y2)
+static void	set_down_direction(float *x1, float *y1, float *x2, float *y2)
 {
-	int	temp;
+	float	temp;
 
 	if (*y1 > *y2)
 	{
@@ -102,7 +102,7 @@ static void	bresenham_y(t_data *img, t_pair p)
 
 void	ft_line(t_data *img, t_pair p)
 {
-	if (fabs((double)(p.bgn.x - p.end.x)) >= fabs((double)(p.bgn.y - p.end.y)))
+	if (fabs(p.bgn.x - p.end.x) >= fabs(p.bgn.y - p.end.y))
 	{
 		set_right_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
 		if (p.bgn.y == p.end.y)

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/23 22:51:03 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/24 22:22:33 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ typedef struct s_data {
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
+	int		zoom;
 	int		endian;
 }				t_data;
 
 typedef struct s_coord {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }				t_coord;
 
 typedef struct s_proj {
@@ -53,17 +54,19 @@ typedef struct s_pair {
 }				t_pair;
 
 typedef struct s_angle {
-	double	deg;
-	double	rad;
-	double	sin;
-	double	cos;
-	double	tan;
+	float	deg;
+	float	rad;
+	float	sin;
+	float	cos;
+	float	tan;
 }				t_angle;
 
 typedef struct s_wireframe {
 	int	height;
 	int	width;
 	int	**z_grid;
+	void	*mlx_ptr;
+	char	*win_ptr;
 }				t_wireframe;
 
 enum e_colors{
@@ -86,9 +89,15 @@ int		ft_read_wireframe(char *file, t_wireframe *data);
 void	ft_putpxl(t_data *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);
+t_pair	new_line(float x, float y, float x1, float y1);
+t_pair	proj(t_pair *line, t_data *img, t_wireframe *data);
+void	perspective(float *x, float *y, int z, t_angle ang);
+void	offset(float *x, float *y, int offset_x, int offset_y);
 t_angle	new_angle(double deg);
 t_coord new_proj(int x, int y, int z, t_angle a);
 void	ft_line(t_data *img, t_pair p);
 void	ft_strline(t_data *img, t_pair p);
+void	ft_draw(t_data *img, t_wireframe *data);
+int		deal_key(int key, t_data *img);
 
 #endif

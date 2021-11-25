@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/23 22:56:15 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:00:00 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	ft_read_wireframe(char *file, t_wireframe *data)
 	data->z_grid = (int **)malloc(sizeof(int *) * (data->height + 1));
 	i = 0;
 	while(i <= data->height)
-		data->z_grid[i] = (int *)malloc(sizeof(int) * (data->width + 1));
+		data->z_grid[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
 	write_data(file, data);
 	data->z_grid[data->height]=NULL;
 	return (0);

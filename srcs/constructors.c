@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:01:40 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/20 21:48:00 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/11/24 22:03:13 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ t_pair	new_pair(t_coord bgn, t_coord end, int color)
 	pair.bgn = bgn;
 	pair.end = end;
 	pair.color = color;
+	return (pair);
+}
+
+t_pair	new_line(float x, float y, float x1, float y1)
+{
+	t_pair	pair;
+
+	pair.bgn = new_coord(x, y, 0);
+	pair.end = new_coord(x1, y1, 0);
+	pair.color = 0xffffff;
 	return (pair);
 }
 

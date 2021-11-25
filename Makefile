@@ -8,6 +8,7 @@ INCLUDE = -Iinclude
 SRCS_PATH = ./srcs
 SRCS = main.c \
 		$(SRCS_PATH)/constructors.c \
+		$(SRCS_PATH)/ft_draw.c \
 		$(SRCS_PATH)/ft_line.c \
 		$(SRCS_PATH)/ft_putpxl.c \
 		$(SRCS_PATH)/ft_read_wireframe.c \
