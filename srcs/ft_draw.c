@@ -6,13 +6,13 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/24 22:08:55 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:10:23 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-void	ft_draw(t_data *img, t_wireframe *data)
+void	ft_draw(t_screen *img, t_wireframe *data)
 {
 	int		x;
 	int		y;
@@ -43,7 +43,7 @@ void	ft_draw(t_data *img, t_wireframe *data)
 void	perspective(float *x, float *y, int z, t_angle ang)
 {
 	*x = (*x - *y) * ang.cos;
-	*y = (*x + *y) * ang.sin - z;
+	*y = (*x + *y) * ang.sin - z * 5;
 }
 
 void	trans(float *x, float *y, int trans_x, int trans_y)
@@ -52,22 +52,22 @@ void	trans(float *x, float *y, int trans_x, int trans_y)
 	*y += trans_y;
 }
 
-t_pair	proj(t_pair *line, t_data *img, t_wireframe *data)
+t_pair	proj(t_pair *line, t_screen *img, t_wireframe *data)
 {
 	int z_bgn;
 	int z_end;
 	
-	z_bgn = data->z_grid[(int)line->bgn.y][(int)line->bgn.x];
-	z_end = data->z_grid[(int)line->end.y][(int)line->end.x];
+	z_bgn = data->grid[(int)line->bgn.y][(int)line->bgn.x].z;
+	z_end = data->grid[(int)line->end.y][(int)line->end.x].z;
 	if (z_bgn)
 		line->color = 0xe80c0c;
 	line->bgn.x *= img->zoom;
 	line->bgn.y *= img->zoom;
-	perspective(&line->bgn.x, &line->bgn.y, z_bgn, new_angle(30));
+	perspective(&line->bgn.x, &line->bgn.y, z_bgn, new_angle(45));
 	trans(&line->bgn.x, &line->bgn.y, 100, 150);
 	line->end.x *= img->zoom;
 	line->end.y *= img->zoom;
-	perspective(&line->end.x, &line->end.y, z_end, new_angle(30));
+	perspective(&line->end.x, &line->end.y, z_end, new_angle(45));
 	trans(&line->end.x, &line->end.y, 100, 150);
 	return (*line);
 }

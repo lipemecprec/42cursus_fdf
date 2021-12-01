@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/24 01:00:00 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:17:57 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ static void	write_data(char *file, t_wireframe *data)
 		j = 0;
 		while (nums[j])
 		{
-			data->z_grid[i][j] = ft_atoi(nums[j]);
+			data->grid[i][j].z = ft_atoi(nums[j]);
+			if(ft_strrchr(nums[j], ','))
+				printf("%s\t", nums[j]);
 			free(nums[j++]);
 		}
 		i++;
@@ -109,11 +111,11 @@ int	ft_read_wireframe(char *file, t_wireframe *data)
 
 	data->height = count_row(file);
 	data->width = count_col(file);
-	data->z_grid = (int **)malloc(sizeof(int *) * (data->height + 1));
+	data->grid = (t_coord **)malloc(sizeof(t_coord *) * (data->height + 1));
 	i = 0;
 	while(i <= data->height)
-		data->z_grid[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
+		data->grid[i++] = (t_coord *)malloc(sizeof(t_coord) * (data->width + 1));
 	write_data(file, data);
-	data->z_grid[data->height]=NULL;
+	data->grid[data->height]=NULL;
 	return (0);
 }

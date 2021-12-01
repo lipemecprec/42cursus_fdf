@@ -16,15 +16,12 @@ SRCS = main.c \
 
 all: $(NAME)
 
-$(NAME): libs
+$(NAME): $(OBJS)
 	$(CC) $(FLAGS) -o $(NAME) $(SRCS) $(LIBS) $(INCLUDE)
 
 libs:
-	@make -C libft
-	@make -C mlx_linux
-
-# .c.o:
-# 	$(CC) -c $(FLAGS) $< -o $(<:.c=.o) $(INCLUDE)
+	make -C libft
+	make -C mlx_linux
 
 clean:
 	# @make -C libft/ clean

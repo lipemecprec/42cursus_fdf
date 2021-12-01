@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:08:17 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/24 16:47:05 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:22:37 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	set_down_direction(float *x1, float *y1, float *x2, float *y2)
 	}
 }
 
-static void	bresenham_x(t_data *img, t_pair p)
+static void	bresenham_x(t_screen *img, t_pair p)
 {
 	int	ddx;
 	int	ddy;
@@ -71,7 +71,7 @@ static void	bresenham_x(t_data *img, t_pair p)
 	}
 }
 
-static void	bresenham_y(t_data *img, t_pair p)
+static void	bresenham_y(t_screen *img, t_pair p)
 {
 	int	ddx;
 	int	ddy;
@@ -100,7 +100,7 @@ static void	bresenham_y(t_data *img, t_pair p)
 	}
 }
 
-void	ft_line(t_data *img, t_pair p)
+void	ft_line(t_screen *img, t_pair p)
 {
 	if (fabs(p.bgn.x - p.end.x) >= fabs(p.bgn.y - p.end.y))
 	{

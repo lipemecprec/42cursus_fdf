@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strline.c                                       :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 22:56:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 17:51:50 by faguilar         ###   ########.fr       */
+/*   Created: 2021/11/27 13:40:26 by faguilar          #+#    #+#             */
+/*   Updated: 2021/11/27 13:41:45 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libfdf.h"
+#ifndef COLORS_H
+# define COLORS_H
 
-void	ft_strline(t_screen *img, t_pair p)
-{
-	if (p.bgn.x == p.end.x)
-	{
-		while (p.bgn.y <= p.end.y)
-		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.y++;
-		}
-	}
-	else if (p.bgn.y == p.end.y)
-	{
-		while (p.bgn.x <= p.end.x)
-		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.x++;
-		}
-	}
-}
+enum e_colors{
+	BLACK = 0x00000000,
+	WHITE = 0x00FFFFFF,
+	RED = 0x00FF0000,
+	LIME = 0x0000FF00,
+	BLUE = 0x000000FF,
+	YELLOW = 0x00FFF000,
+	CYAN = 0x0000FFFF,
+	FUCHSIA = 0x00FF00FF,
+	SILVER = 0x00C0C0C0,
+	GREY = 0x00333333,
+	GREEN = 0x00008000,
+	PURPLE = 0x00800080,
+	TEAL = 0x0008080
+};
+
+#endif
