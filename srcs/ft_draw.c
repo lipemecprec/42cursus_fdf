@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 18:10:23 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:32:22 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ t_pair	proj(t_pair *line, t_screen *img, t_wireframe *data)
 	z_end = data->grid[(int)line->end.y][(int)line->end.x].z;
 	if (z_bgn)
 		line->color = 0xe80c0c;
-	line->bgn.x *= img->zoom;
-	line->bgn.y *= img->zoom;
+	line->bgn.x *= data->zoom;
+	line->bgn.y *= data->zoom;
 	perspective(&line->bgn.x, &line->bgn.y, z_bgn, new_angle(45));
 	trans(&line->bgn.x, &line->bgn.y, 100, 150);
-	line->end.x *= img->zoom;
-	line->end.y *= img->zoom;
+	line->end.x *= data->zoom;
+	line->end.y *= data->zoom;
 	perspective(&line->end.x, &line->end.y, z_end, new_angle(45));
 	trans(&line->end.x, &line->end.y, 100, 150);
 	return (*line);

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 18:17:57 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:26:18 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	write_data(char *file, t_wireframe *data)
 	close(fd);
 }
 
-int	ft_read_wireframe(char *file, t_wireframe *data)
+int	ft_read_wireframe(t_wireframe *data, char *file)
 {
 	int i;
 

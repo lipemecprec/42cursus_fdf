@@ -16,7 +16,7 @@ SRCS = main.c \
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(SRCS)
 	$(CC) $(FLAGS) -o $(NAME) $(SRCS) $(LIBS) $(INCLUDE)
 
 libs:

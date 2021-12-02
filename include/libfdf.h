@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 18:19:02 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:22:14 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,8 @@
 # include <string.h> // strerror
 
 # define PI 3.14159265
-
-typedef struct s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		zoom;
-	int		endian;
-}				t_screen;
+# define SCR_WIDTH 1024
+# define SCR_HEIGHT 1024
 
 typedef struct s_coord {
 	float	x;
@@ -44,19 +37,6 @@ typedef struct s_coord {
 	int		z;
 	int		color;
 }				t_coord;
-
-typedef struct s_wireframe {
-	int		height;
-	int		width;
-	t_coord	**grid;
-	void	*mlx_ptr;
-	char	*win_ptr;
-}				t_wireframe;
-
-typedef struct s_proj {
-	int	x;
-	int	y;
-}				t_proj;
 
 typedef struct s_pair {
 	t_coord	bgn;
@@ -72,7 +52,31 @@ typedef struct s_angle {
 	float	tan;
 }				t_angle;
 
-int		ft_read_wireframe(char *file, t_wireframe *data);
+typedef struct s_screen {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx_ptr;
+	char	*win_ptr;
+}				t_screen;
+
+typedef struct s_wireframe {
+	int		height;
+	int		width;
+	t_coord	**grid;
+	int		zoom;
+	t_coord	position;
+	t_angle	angle;
+}				t_wireframe;
+
+typedef struct s_proj {
+	int	x;
+	int	y;
+}				t_proj;
+
+int		ft_read_wireframe(t_wireframe *data, char *file);
 void	ft_putpxl(t_screen *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);

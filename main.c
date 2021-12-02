@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 18:19:24 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:31:56 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	main(int argc, char **argv)
 	// if (argc != 2)
 	// 	return(1);
 	data = (t_wireframe *)malloc(sizeof(t_wireframe));
-	ft_read_wireframe(argv[1], data);
+	ft_read_wireframe(data, argv[1]);
 	mlx_ptr = mlx_init();
 	mlx_win = mlx_new_window(mlx_ptr, 1024, 1024, "FDF");
 	scr.img = mlx_new_image(mlx_ptr, 4000, 4000);
-	scr.zoom = 50;
+	data->zoom = 50;
 	scr.addr = mlx_get_data_addr(scr.img, &scr.bits_per_pixel, &scr.line_length,
 								&scr.endian);
 	ft_draw(&scr, data);
