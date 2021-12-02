@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 20:22:14 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/02 14:38:39 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define PI 3.14159265
 # define SCR_WIDTH 1024
 # define SCR_HEIGHT 1024
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 
 typedef struct s_coord {
 	float	x;
