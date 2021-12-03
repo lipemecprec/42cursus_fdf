@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/03 15:12:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:49:34 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,6 @@ typedef struct s_angle {
 	float	tan;
 }				t_angle;
 
-typedef struct s_screen {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx_ptr;
-	char	*mlx_win;
-}				t_screen;
-
 typedef struct s_wireframe {
 	int		height;
 	int		width;
@@ -72,6 +62,17 @@ typedef struct s_wireframe {
 	t_coord	position;
 	t_angle	angle;
 }				t_wireframe;
+
+typedef struct s_screen {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx_ptr;
+	char	*mlx_win;
+	t_wireframe *data;
+}				t_screen;
 
 typedef struct s_proj {
 	int	x;

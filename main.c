@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 09:23:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/03 15:51:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:04:35 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,36 @@ static void ft_print_data(t_wireframe *data)
 	}
 }
 
-int	deal_key(int key, t_wireframe *scr)
+void shutdown(void *mlx_ptr, void *win_ptr)
+{
+	mlx_clear_window(mlx_ptr, win_ptr);
+	mlx_destroy_window(mlx_ptr, win_ptr);
+} 
+
+int	deal_key(int key, t_screen *scr)
 {
 	write(2, ft_itoa(key), 4);
 	if(key == KEY_ESC)
-		return (1);
+		shutdown(scr->mlx_ptr, scr->mlx_win);
 	else if (key == KEY_W)
 		return (0);
-	return (0);
 }
 
 static t_screen init_screen(char *file_name, void *mlx_ptr, t_wireframe	*data)
 {
-	t_screen	scr;
-	char 		*title;
+	static t_screen	scr;
+	char 			*title;
 
+	scr.mlx_ptr = mlx_ptr;
+	scr.data = data;
 	title = ft_strjoin("FDF - ", file_name);
 	write(1, "mlx_new_window\n", 16);
 	scr.mlx_win = mlx_new_window(mlx_ptr, SCR_HEIGHT, SCR_WIDTH, title);
 	write(1, "mlx_new_image \n", 16);
 	scr.img = mlx_new_image(mlx_ptr, IMG_HEIGHT, IMG_WIDTH);
 	write(1, "mlx_get_data_a\n", 16);
-	scr.addr = mlx_get_data_addr(scr.img, &scr.bits_per_pixel, &scr.line_length,
-								&scr.endian);
+	scr.addr = mlx_get_data_addr(scr.img, &scr.bits_per_pixel, 
+								&scr.line_length, &scr.endian);
 	write(1, "ft_draw       \n", 16);
 	ft_draw(&scr, data);
 	write(1, "ft_print_data \n", 16);
@@ -90,12 +97,10 @@ int	main(int argc, char **argv)
 	printf("mlx_ptr: %p \n", mlx_init());
 	scr = init_screen(argv[1], mlx_ptr, data);
 	write(1, "mlx_key_hook  \n", 16);
-	mlx_key_hook(scr.mlx_win, deal_key, data);
+	mlx_key_hook(scr.mlx_win, deal_key, &scr);
 	// mlx_expose_hook(scr.mlx_win, &deal_key, &scr);
 	write(1, "mlx_loop       \n", 16);
-	mlx_loop(mlx_ptr);
+	mlx_loop(scr.mlx_ptr);
 	write(1, "end            \n", 16);
-	// mlx_clear_window(&mlx, &scr.mlx_win);
-	// mlx_destroy_window(&mlx, &scr.mlx_win);
-
+	return (0);
 }
