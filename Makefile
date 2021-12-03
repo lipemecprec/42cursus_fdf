@@ -1,9 +1,10 @@
 NAME = fdf
-CC = clang
+CC = gcc
 # FLAGS = -Wall -Wextra -Werror
 
-LIBS = -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS = -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 INCLUDE = -Iinclude
+LIBS = libft/libft.a mlx_linux/libmlx.a
 
 SRCS_PATH = ./srcs
 SRCS = main.c \
@@ -16,20 +17,20 @@ SRCS = main.c \
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-	$(CC) $(FLAGS) -o $(NAME) $(SRCS) $(LIBS) $(INCLUDE)
+$(NAME): $(SRCS) $(LIBS)
+	$(CC) $(FLAGS) -o $(NAME) $(SRCS) $(LIB_FLAGS) $(INCLUDE)
 
-libs:
+$(LIBS):
 	make -C libft
 	make -C mlx_linux
 
 clean:
-	# @make -C libft/ clean
-	# @make -C mlx_linux/ clean
+	@make -C libft/ clean
+	@make -C mlx_linux/ clean
 	rm -rf $(OBJS)
 
 fclean: clean
-	# @make -C libft/ fclean
+	make -C libft/ fclean
 	rm $(NAME)
 
 re: fclean all

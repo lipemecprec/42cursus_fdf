@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/02 14:38:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/03 15:12:39 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_screen {
 	int		line_length;
 	int		endian;
 	void	*mlx_ptr;
-	char	*win_ptr;
+	char	*mlx_win;
 }				t_screen;
 
 typedef struct s_wireframe {
