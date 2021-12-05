@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strline.c                                       :+:      :+:    :+:   */
+/*   strline.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 22:56:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 17:51:50 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/04 21:25:06 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-void	ft_strline(t_screen *img, t_pair p)
+void	strline(t_point bgn, t_point end, t_wireframe *data)
 {
-	if (p.bgn.x == p.end.x)
+	if (bgn.x == end.x)
 	{
-		while (p.bgn.y <= p.end.y)
+		while (bgn.y <= end.y)
 		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.y++;
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, \
+				bgn.x, bgn.y, bgn.color);
+			bgn.y++;
 		}
 	}
-	else if (p.bgn.y == p.end.y)
+	else if (bgn.y == end.y)
 	{
-		while (p.bgn.x <= p.end.x)
+		while (bgn.x <= end.x)
 		{
-			ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
-			p.bgn.x++;
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, \
+				bgn.x, bgn.y, bgn.color);
+			bgn.x++;
 		}
 	}
 }

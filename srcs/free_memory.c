@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putpxl.c                                        :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 11:04:18 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 17:51:29 by faguilar         ###   ########.fr       */
+/*   Created: 2021/12/04 21:27:22 by faguilar          #+#    #+#             */
+/*   Updated: 2021/12/04 21:29:27 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-void	ft_putpxl(t_screen *data, int x, int y, int color)
+void	free_wireframe_data(t_wireframe *data)
 {
-	char	*dst;
+	int	i;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	i = 0;
+	while (i <= data->height)
+		free(data->z_grid[i++]);
+	free(data->z_grid);
 }

@@ -11,9 +11,8 @@ SRCS = main.c \
 		$(SRCS_PATH)/constructors.c \
 		$(SRCS_PATH)/draw.c \
 		$(SRCS_PATH)/line.c \
-		$(SRCS_PATH)/putpxl.c \
 		$(SRCS_PATH)/read_wireframe.c \
-		$(SRCS_PATH)/strline.c
+		$(SRCS_PATH)/strline.c \
 
 all: $(NAME)
 

@@ -5,19 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 17:16:52 by faguilar         ###   ########.fr       */
+/*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
+/*   Updated: 2021/12/04 23:38:41 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFDF_H
-
 # define LIBFDF_H
 
 # include "mlx.h"
-# include "../libft/libft.h"
-# include "colors.h"
-# include "keys.h"
 # include <math.h>
 # include <sys/types.h> // open
 # include <sys/stat.h> // open
@@ -27,24 +23,23 @@
 # include <stdio.h> // perror
 # include <string.h> // strerror
 
+# include "../libft/libft.h"
+# include "colors.h"
+# include "keys.h"
+
 # define PI 3.14159265
 # define SCR_WIDTH 1024
 # define SCR_HEIGHT 1024
 # define IMG_WIDTH 1024
 # define IMG_HEIGHT 1024
 
-typedef struct s_coord {
+typedef struct s_point
+{
 	float	x;
 	float	y;
-	int		z;
+	float	z;
 	int		color;
-}				t_coord;
-
-typedef struct s_pair {
-	t_coord	bgn;
-	t_coord	end;
-	int		color;
-}				t_pair;
+}				t_point;
 
 typedef struct s_angle {
 	float	deg;
@@ -54,44 +49,32 @@ typedef struct s_angle {
 	float	tan;
 }				t_angle;
 
-typedef struct s_wireframe {
-	int		height;
+typedef struct	s_wireframe
+{
 	int		width;
-	t_coord	**grid;
+	int		height;
+	int		**z_grid;
 	int		zoom;
-	t_coord	position;
 	t_angle	angle;
+	int		z_scale;
+	t_point	position;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }				t_wireframe;
 
-typedef struct s_screen {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx_ptr;
-	void	*mlx_win;
-	t_wireframe *data;
-}				t_screen;
+// Create new point
+t_point	point(float x, float y, float z, int color);
+// Create new angle
+t_angle	angle(double deg);
+// Read fdf file and write data to matrix
+void	read_wireframe(t_wireframe *data, char *file_name);
+// Simplified implementation of bresenham algorithm to draw a line
+void	bresenham(t_point bgn, t_point end, t_wireframe *data);
+// Function for straight lines
+void	strline(t_point bgn, t_point end, t_wireframe *data);
+// Draw wireframe
+void	draw(t_wireframe *data);
 
-typedef struct s_proj {
-	int	x;
-	int	y;
-}				t_proj;
 
-int		ft_read_wireframe(t_wireframe *data, char *file);
-void	ft_putpxl(t_screen *data, int x, int y, int color);
-t_coord	new_coord(int x, int y, int z);
-t_pair	new_pair(t_coord bgn, t_coord end, int color);
-t_pair	new_line(float x, float y, float x1, float y1);
-t_pair	proj(t_pair *line, t_wireframe *data);
-void	perspective(float *x, float *y, int z, t_angle ang);
-void	offset(float *x, float *y, int offset_x, int offset_y);
-t_angle	new_angle(double deg);
-t_coord new_proj(int x, int y, int z, t_angle a);
-void	ft_line(t_screen *img, t_pair p);
-void	ft_strline(t_screen *img, t_pair p);
-void	ft_draw(t_screen *img, t_wireframe *data);
-void	ft_render(t_screen *scr, t_wireframe *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 22:36:46 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/04 21:27:36 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,22 @@ static int	ft_wordcount(char const *s, char c)
 	return (words);
 }
 
-static int	count_col(char *file)
-{
-	int		col;
-	int		fd;
-	char	*line;
-
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	col = ft_wordcount(line, ' ');
-	free(line);
-	close(fd);
-	return (col);
-}
-
-static int	count_row(char *file)
+static int	count_row(char *file_name)
 {
 	int		row;
 	int		fd;
 	char	*line;
 
-	fd = open(file, O_RDONLY);
+	fd = open(file_name, O_RDONLY);
 	row = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+		{
+			free(line);
+			break ;
+		}
 		row++;
 		free(line);
 	}
@@ -74,48 +63,61 @@ static int	count_row(char *file)
 	return (row);
 }
 
-static void	write_data(char *file, t_wireframe *data)
+static int	count_col(char *file_name)
 {
+	int		col;
 	int		fd;
 	char	*line;
+
+	fd = open(file_name, O_RDONLY);
+	line = get_next_line(fd);
+	col = ft_wordcount(line, ' ');
+	free(line);
+	close(fd);
+	return (col);
+}
+
+static void	write_data(int *z_data, char *line)
+{
 	char	**nums;
 	int		i;
-	int		j;
 
-	fd = open(file, O_RDONLY);
+	nums = ft_split(line, ' ');
 	i = 0;
-	while(1)
+	while (nums[i])
+	{
+		z_data[i] = ft_atoi(nums[i]);
+		free(nums[i]);
+		i++;
+	}
+	free(nums);
+}
+
+void	read_wireframe(t_wireframe *data, char *file_name)
+{
+	int		i;
+	int		fd;
+	char	*line;
+
+	data->height = count_row(file_name);
+	data->width = count_col(file_name);
+	data->z_grid = (int **)malloc(sizeof(int *) * (data->height + 1));
+	i = 0;
+	while (i <= data->height)
+		data->z_grid[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
+	fd = open(file_name, O_RDONLY);
+	i = 0;
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
-		nums = ft_split(line, ' ');
-		j = 0;
-		while (nums[j])
 		{
-			data->grid[i][j].z = ft_atoi(nums[j]);
-			if(ft_strrchr(nums[j], ','))
-				printf("%s\t", nums[j]);
-			free(nums[j++]);
+			free(line);
+			break ;
 		}
-		i++;
-		free(nums);
+		write_data(data->z_grid[i++], line);
 		free(line);
 	}
-	close(fd);
-}
-
-int	ft_read_wireframe(t_wireframe *data, char *file)
-{
-	int i;
-
-	data->height = count_row(file);
-	data->width = count_col(file);
-	data->grid = (t_coord **)malloc(sizeof(t_coord *) * (data->height + 1));
-	i = 0;
-	while(i <= data->height)
-		data->grid[i++] = (t_coord *)malloc(sizeof(t_coord) * (data->width + 1));
-	write_data(file, data);
-	data->grid[data->height]=NULL;
-	return (0);
+	data->z_grid[data->height] = NULL;
+	close (fd);
 }

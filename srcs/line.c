@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_line.c                                          :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 11:08:17 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/01 18:22:37 by faguilar         ###   ########.fr       */
+/*   Created: 2021/12/04 19:47:42 by faguilar          #+#    #+#             */
+/*   Updated: 2021/12/04 22:39:17 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static void	set_down_direction(float *x1, float *y1, float *x2, float *y2)
 	}
 }
 
-static void	bresenham_x(t_screen *img, t_pair p)
+static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 {
 	int	ddx;
 	int	ddy;
 	int	yinc;
 	int	pz;
 
-	ddx = 2 * (p.end.x - p.bgn.x);
-	ddy = 2 * (p.end.y - p.bgn.y);
+	ddx = 2 * (end.x - bgn.x);
+	ddy = 2 * (end.y - bgn.y);
 	yinc = 1;
 	if (ddy < 0)
 	{
@@ -58,28 +58,28 @@ static void	bresenham_x(t_screen *img, t_pair p)
 		ddy = -ddy;
 	}
 	pz = ddy - (ddx / 2);
-	while (p.bgn.x++ <= p.end.x)
+	while (bgn.x++ <= end.x)
 	{
-		ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
 		if (pz > 0)
 		{
 			pz = pz - ddx + ddy;
-			p.bgn.y += yinc;
+			bgn.y += yinc;
 		}
 		else
 			pz = pz + ddy;
 	}
 }
 
-static void	bresenham_y(t_screen *img, t_pair p)
+static void	bresenham_y(t_point bgn, t_point end, t_wireframe *data)
 {
 	int	ddx;
 	int	ddy;
 	int	xinc;
 	int	pz;
 
-	ddx = 2 * (p.end.x - p.bgn.x);
-	ddy = 2 * (p.end.y - p.bgn.y);
+	ddx = 2 * (end.x - bgn.x);
+	ddy = 2 * (end.y - bgn.y);
 	xinc = 1;
 	if (ddx < 0)
 	{
@@ -87,35 +87,35 @@ static void	bresenham_y(t_screen *img, t_pair p)
 		xinc = -xinc;
 	}
 	pz = ddy - (ddx / 2);
-	while (p.bgn.y++ <= p.end.y)
+	while (bgn.y++ <= end.y)
 	{
-		ft_putpxl(img, p.bgn.x, p.bgn.y, p.color);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
 		if (pz > 0)
 		{
 			pz = pz - ddy + ddx;
-			p.bgn.x += xinc;
+			bgn.x += xinc;
 		}
 		else
 			pz = pz + ddx;
 	}
 }
 
-void	ft_line(t_screen *img, t_pair p)
+void	bresenham(t_point bgn, t_point end, t_wireframe *data)
 {
-	if (fabs(p.bgn.x - p.end.x) >= fabs(p.bgn.y - p.end.y))
+	if (fabs(bgn.x - end.x) >= fabs(bgn.y - end.y))
 	{
-		set_right_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
-		if (p.bgn.y == p.end.y)
-			ft_strline(img, p);
+		set_right_direction(&bgn.x, &bgn.y, &end.x, &end.y);
+		if (bgn.y == end.y)
+			strline(bgn, end, data);
 		else
-			bresenham_x(img, p);
+			bresenham_x(bgn, end, data);
 	}
 	else
 	{
-		set_down_direction(&p.bgn.x, &p.bgn.y, &p.end.x, &p.end.y);
-		if (p.bgn.x == p.end.x)
-			ft_strline(img, p);
+		set_down_direction(&bgn.x, &bgn.y, &end.x, &end.y);
+		if (bgn.x == end.x)
+			strline(bgn, end, data);
 		else
-			bresenham_y(img, p);
+			bresenham_y(bgn, end, data);
 	}
 }
