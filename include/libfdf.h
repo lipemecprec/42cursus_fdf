@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 21:28:03 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/03 17:49:34 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/04 17:16:52 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_screen {
 	int		line_length;
 	int		endian;
 	void	*mlx_ptr;
-	char	*mlx_win;
+	void	*mlx_win;
 	t_wireframe *data;
 }				t_screen;
 
@@ -84,7 +84,7 @@ void	ft_putpxl(t_screen *data, int x, int y, int color);
 t_coord	new_coord(int x, int y, int z);
 t_pair	new_pair(t_coord bgn, t_coord end, int color);
 t_pair	new_line(float x, float y, float x1, float y1);
-t_pair	proj(t_pair *line, t_screen *img, t_wireframe *data);
+t_pair	proj(t_pair *line, t_wireframe *data);
 void	perspective(float *x, float *y, int z, t_angle ang);
 void	offset(float *x, float *y, int offset_x, int offset_y);
 t_angle	new_angle(double deg);
@@ -92,5 +92,6 @@ t_coord new_proj(int x, int y, int z, t_angle a);
 void	ft_line(t_screen *img, t_pair p);
 void	ft_strline(t_screen *img, t_pair p);
 void	ft_draw(t_screen *img, t_wireframe *data);
+void	ft_render(t_screen *scr, t_wireframe *data);
 
 #endif
