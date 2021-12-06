@@ -34,4 +34,19 @@ fclean: clean
 
 re: fclean all
 
+MAPS := 10-2.fdf 100-6.fdf 42.fdf basictest.fdf elem-fract.fdf elem2.fdf mars.fdf plat.fdf
+
+MAPS2 := pylone.fdf pyramide.fdf t2.fdf 10-70.fdf 20-60.fdf 50-4.fdf elem-col.fdf elem.fdf
+
+MAPS3 := julia.fdf pentenegpos.fdf pnp_flat.fdf pyra.fdf t1.fdf t2.fdf 
+
+test:
+	$(foreach map,$(MAPS),echo $(map) && ./$(NAME) test_maps/$(map))
+
+test2:
+	$(foreach map,$(MAPS2),echo $(map) && ./$(NAME) test_maps/$(map))
+
+test3:
+	$(foreach map,$(MAPS3),echo $(map) && ./$(NAME) test_maps/$(map))
+
 .PHONY: all clean fclean re
