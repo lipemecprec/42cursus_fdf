@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 23:38:41 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:56:44 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "keys.h"
 
 # define PI 3.14159265
-# define SCR_WIDTH 1024
-# define SCR_HEIGHT 1024
+# define SCR_WIDTH 2560
+# define SCR_HEIGHT 1200
 # define IMG_WIDTH 1024
 # define IMG_HEIGHT 1024
 
@@ -37,7 +37,7 @@ typedef struct s_point
 {
 	float	x;
 	float	y;
-	float	z;
+	int		z;
 	int		color;
 }				t_point;
 
@@ -53,11 +53,12 @@ typedef struct	s_wireframe
 {
 	int		width;
 	int		height;
-	int		**z_grid;
+	t_point	**z_grid;
 	int		zoom;
 	t_angle	angle;
 	int		z_scale;
 	t_point	position;
+	t_point	center;
 	void	*mlx_ptr;
 	void	*win_ptr;
 }				t_wireframe;
@@ -74,6 +75,7 @@ void	bresenham(t_point bgn, t_point end, t_wireframe *data);
 void	strline(t_point bgn, t_point end, t_wireframe *data);
 // Draw wireframe
 void	draw(t_wireframe *data);
+void	shutdown(t_wireframe *data);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 23:42:05 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/07 23:00:08 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ t_point	proj(int x, int y, t_wireframe *data)
 
 	proj.x = x * data->zoom;
 	proj.y = y * data->zoom;
-	proj.z = data->z_grid[(int)y][(int)x];
-	if (proj.z == 0)
-		proj.color = YELLOW;
-	else
-		proj.color = RED;
+	proj.z = data->z_grid[(int)y][(int)x].z;
+	proj.color = data->z_grid[(int)y][(int)x].color;
 	tridimensional(&proj, data);
 	translate(&proj, data);
 	return (proj);
@@ -59,5 +56,11 @@ void	draw(t_wireframe *data)
 			x++;
 		}
 		y++;
+	}
+	int i = 0;
+	while (i < 10)
+	{
+		strline(point(0, SCR_HEIGHT - i, 0, YELLOW), point(SCR_WIDTH, SCR_HEIGHT - i, 0, RED), data);
+		i++;
 	}
 }

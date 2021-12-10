@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:47:42 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 22:39:17 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:47:13 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 	yinc = 1;
 	if (ddy < 0)
 	{
-		yinc = -yinc;
 		ddy = -ddy;
+		yinc = -yinc;
 	}
 	pz = ddy - (ddx / 2);
 	while (bgn.x++ <= end.x)

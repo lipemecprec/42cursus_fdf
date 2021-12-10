@@ -12,6 +12,7 @@ SRCS = main.c \
 		$(SRCS_PATH)/draw.c \
 		$(SRCS_PATH)/line.c \
 		$(SRCS_PATH)/read_wireframe.c \
+		$(SRCS_PATH)/shutdown.c \
 		$(SRCS_PATH)/strline.c \
 
 all: $(NAME)
@@ -34,11 +35,11 @@ fclean: clean
 
 re: fclean all
 
-MAPS := 10-2.fdf 100-6.fdf 42.fdf basictest.fdf elem-fract.fdf elem2.fdf mars.fdf plat.fdf
+MAPS = 10-2.fdf 100-6.fdf 42.fdf basictest.fdf elem-fract.fdf elem2.fdf mars.fdf plat.fdf
 
-MAPS2 := pylone.fdf pyramide.fdf t2.fdf 10-70.fdf 20-60.fdf 50-4.fdf elem-col.fdf elem.fdf
+MAPS2 = pylone.fdf pyramide.fdf t2.fdf 10-70.fdf 20-60.fdf 50-4.fdf elem-col.fdf elem.fdf
 
-MAPS3 := julia.fdf pentenegpos.fdf pnp_flat.fdf pyra.fdf t1.fdf t2.fdf 
+MAPS3 = julia.fdf pentenegpos.fdf pnp_flat.fdf pyra.fdf t1.fdf t2.fdf 
 
 test:
 	$(foreach map,$(MAPS),echo $(map) && ./$(NAME) test_maps/$(map))

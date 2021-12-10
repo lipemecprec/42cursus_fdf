@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:58:18 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/06 17:34:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:56:57 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_atohex(const char *num_str)
 		return (-1);
 	num_int = 0;
 	base = 1;
-	i = 6;
+	i = ft_strlen(hex_str);
 	while (i > 0)
 	{
 		num_int = num_int + ctohex(hex_str[i]) * base;
