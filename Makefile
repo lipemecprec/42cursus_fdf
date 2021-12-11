@@ -10,6 +10,7 @@ SRCS_PATH = ./srcs
 SRCS = main.c \
 		$(SRCS_PATH)/constructors.c \
 		$(SRCS_PATH)/draw.c \
+		$(SRCS_PATH)/line_utils.c \
 		$(SRCS_PATH)/line.c \
 		$(SRCS_PATH)/read_wireframe.c \
 		$(SRCS_PATH)/shutdown.c \

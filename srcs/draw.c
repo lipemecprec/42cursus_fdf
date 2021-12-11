@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/07 23:00:08 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/11 00:32:54 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	translate(t_point *point, t_wireframe *data)
 
 t_point	proj(int x, int y, t_wireframe *data)
 {
-	t_point	proj;
+	t_point	point;
 
-	proj.x = x * data->zoom;
-	proj.y = y * data->zoom;
-	proj.z = data->z_grid[(int)y][(int)x].z;
-	proj.color = data->z_grid[(int)y][(int)x].color;
-	tridimensional(&proj, data);
-	translate(&proj, data);
-	return (proj);
+	point.x = x * data->zoom;
+	point.y = y * data->zoom;
+	point.z = data->z_grid[(int)y][(int)x].z;
+	point.color = data->z_grid[(int)y][(int)x].color;
+	tridimensional(&point, data);
+	translate(&point, data);
+	return (point);
 }
 
 void	draw(t_wireframe *data)
@@ -56,11 +56,5 @@ void	draw(t_wireframe *data)
 			x++;
 		}
 		y++;
-	}
-	int i = 0;
-	while (i < 10)
-	{
-		strline(point(0, SCR_HEIGHT - i, 0, YELLOW), point(SCR_WIDTH, SCR_HEIGHT - i, 0, RED), data);
-		i++;
 	}
 }

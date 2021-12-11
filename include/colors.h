@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:40:26 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/03 19:20:24 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/11 00:10:34 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ enum e_colors{
 	BLACK = 0x00000000,
 	WHITE = 0x00FFFFFF,
 	RED = 0x00C80000,
+	PINK = 0x00FF91FF,
 	LIME = 0x0000C800,
 	BLUE = 0x000000FF,
 	YELLOW = 0x00FFF000,

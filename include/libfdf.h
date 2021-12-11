@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/07 22:56:44 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/11 00:04:10 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,23 @@ typedef struct	s_wireframe
 	void	*win_ptr;
 }				t_wireframe;
 
+typedef struct s_bresenham {
+	int		ddx;
+	int		ddy;
+	int		step;
+	int		pz;
+	char	axis;
+}				t_bresenham;
+
 // Create new point
 t_point	point(float x, float y, float z, int color);
 // Create new angle
 t_angle	angle(double deg);
 // Read fdf file and write data to matrix
 void	read_wireframe(t_wireframe *data, char *file_name);
+void	set_right_direction(float *x1, float *y1, float *x2, float *y2);
+void	set_down_direction(float *x1, float *y1, float *x2, float *y2);
+double	get_color_gradient(t_point bgn, t_point end);
 // Simplified implementation of bresenham algorithm to draw a line
 void	bresenham(t_point bgn, t_point end, t_wireframe *data);
 // Function for straight lines
@@ -76,7 +87,5 @@ void	strline(t_point bgn, t_point end, t_wireframe *data);
 // Draw wireframe
 void	draw(t_wireframe *data);
 void	shutdown(t_wireframe *data);
-
-
 
 #endif

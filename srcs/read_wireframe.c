@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/07 17:00:56 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/11 00:37:05 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	write_data(t_point *z_data, char *line)
 		if (color)
 			z_data[i].color = ft_atohex(color + 1);
 		else if (z_data[i].z != 0)
-			z_data[i].color = RED;
+			z_data[i].color = PINK;
 		nums[i] = NULL;
 		free(nums[i]);
 		i++;
@@ -111,9 +111,7 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 	char	*line;
 
 	data->height = count_row(file_name);
-	// printf("ROWS: %d\t", data->height);
 	data->width = count_col(file_name);
-	// printf("ROWS: %d\n", data->width);
 	data->z_grid = (t_point **)malloc(sizeof(t_point *) * (data->height + 1));
 	i = 0;
 	while (i <= data->height)

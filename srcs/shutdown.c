@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 21:27:22 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/08 18:03:57 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/10 12:44:21 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	shutdown(t_wireframe *data)
 	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	// mlx_loop_end(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	// mlx_destroy_image(data->mlx_ptr, data->win_ptr);
-	// mlx_destroy_display(data->mlx_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
 	// free_wireframe_data(data);
 }
