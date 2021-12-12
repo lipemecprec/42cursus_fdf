@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:47:42 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/11 00:19:35 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:31:15 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	calc_bresenham(t_point bgn, t_point end, t_bresenham *b)
 static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 {
 	t_bresenham	b;
-	double		gradient;
+	t_color		gradient;
 
 	b.axis = 'x';
 	calc_bresenham(bgn, end, &b);
@@ -39,7 +39,7 @@ static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 	while (bgn.x++ <= end.x)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
-		bgn.color += gradient / 128;
+		bgn.color = add_color_step(bgn.color, gradient);
 		if (b.pz > 0)
 		{
 			b.pz = b.pz - b.ddx + b.ddy;
@@ -53,7 +53,7 @@ static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 static void	bresenham_y(t_point bgn, t_point end, t_wireframe *data)
 {
 	t_bresenham	b;
-	double		gradient;
+	t_color		gradient;
 
 	b.axis = 'y';
 	calc_bresenham(bgn, end, &b);
@@ -61,7 +61,7 @@ static void	bresenham_y(t_point bgn, t_point end, t_wireframe *data)
 	while (bgn.y++ <= end.y)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
-		bgn.color -= gradient / 128;
+		bgn.color = add_color_step(bgn.color, gradient);
 		if (b.pz > 0)
 		{
 			b.pz = b.pz - b.ddy + b.ddx;

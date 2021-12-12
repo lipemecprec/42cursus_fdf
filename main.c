@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/08 19:43:11 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:24:29 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,17 @@ int	deal_key(int key, t_wireframe *data)
 	else if (key == KEY_DOWN)
 		data->position.y += 10;
 	else if (key == KEY_W)
-		data->zoom += 10;
+		data->zoom += 1;
 	else if (key == KEY_S)
-		data->zoom -= 10;
+		data->zoom -= 1;
 	else if (key == KEY_A)
-		data->angle = angle(data->angle.deg + 5);
+		data->rotation_z = angle(data->rotation_z.deg + 5);
 	else if (key == KEY_D)
-		data->angle = angle(data->angle.deg - 5);
+		data->rotation_z = angle(data->rotation_z.deg - 5);
+	else if (key == KEY_Z)
+		data->rotation_y = angle(data->rotation_y.deg + 5);
+	else if (key == KEY_X)
+		data->rotation_y = angle(data->rotation_y.deg - 5);
 	else if (key == KEY_ESC)
 		shutdown(data);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
@@ -80,16 +84,22 @@ void	init_window(t_wireframe *data, char *file_name)
 	title = ft_strjoin("FDF - ", file_name);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, title);
-	data->zoom = 20;
-	data->angle = angle(45);
-	data->z_scale = 10;
-	data->position = point(SCR_WIDTH / 2, SCR_HEIGHT / 4, 0, 0);
+	data->angle = angle(60);
+	data->zoom = (SCR_HEIGHT * 0.9) / ((data->width + data->height) * data->angle.cos);
+	data->rotation_x = angle(0);
+	data->rotation_y = angle(0);
+	data->rotation_z = angle(0);
+	data->center = point(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0, 0);
+	data->z_scale = 2;
+	data->position = point(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0, 0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_wireframe	*data;
 
+	if (argc != 2)
+		return (0);
 	data = (t_wireframe *)malloc(sizeof(t_wireframe));
 	read_wireframe(data, argv[1]);
 	// ft_print_data(data); // debug
@@ -100,4 +110,5 @@ int	main(int argc, char **argv)
 	// sleep(5);
 	// mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_loop(data->mlx_ptr);
+	return (0);
 }

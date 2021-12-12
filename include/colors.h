@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:40:26 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/11 00:10:34 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:32:46 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,19 @@ enum e_colors{
 	PURPLE = 0x00800080,
 	TEAL = 0x0008080
 };
+
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	float	r_step;
+	float	g_step;
+	float	b_step;
+	int		value;
+}		t_color;
+
+t_color	color(int value);
+int		add_color_step(int bgn, t_color step);
 
 #endif

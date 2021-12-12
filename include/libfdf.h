@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/11 00:04:10 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:23:40 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "keys.h"
 
 # define PI 3.14159265
-# define SCR_WIDTH 2560
-# define SCR_HEIGHT 1200
+# define SCR_WIDTH 1024
+# define SCR_HEIGHT 1024
 # define IMG_WIDTH 1024
 # define IMG_HEIGHT 1024
 
@@ -56,6 +56,9 @@ typedef struct	s_wireframe
 	t_point	**z_grid;
 	int		zoom;
 	t_angle	angle;
+	t_angle	rotation_x;
+	t_angle	rotation_y;
+	t_angle	rotation_z;
 	int		z_scale;
 	t_point	position;
 	t_point	center;
@@ -79,7 +82,7 @@ t_angle	angle(double deg);
 void	read_wireframe(t_wireframe *data, char *file_name);
 void	set_right_direction(float *x1, float *y1, float *x2, float *y2);
 void	set_down_direction(float *x1, float *y1, float *x2, float *y2);
-double	get_color_gradient(t_point bgn, t_point end);
+t_color	get_color_gradient(t_point bgn, t_point end);
 // Simplified implementation of bresenham algorithm to draw a line
 void	bresenham(t_point bgn, t_point end, t_wireframe *data);
 // Function for straight lines

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:15:09 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/04 23:32:38 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:37:19 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,20 @@ t_angle	angle(double deg)
 	t_angle	angle;
 
 	angle.deg = deg;
-	angle.rad = PI / 180 * deg;
+	angle.rad = (PI / 180) * deg;
 	angle.sin = sin(angle.rad);
 	angle.cos = cos(angle.rad);
 	angle.tan = tan(angle.rad);
 	return (angle);
+}
+
+t_color	color(int value)
+{
+	t_color	color;
+
+	color.r = value / pow(256,2);
+	color.g = (value / 256) % 256;
+	color.b = value % 256;
+	color.value = value;
+	return (color);
 }
