@@ -6,22 +6,22 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 23:16:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/06 15:14:26 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:10:50 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef OPEN_MAX
-# define OPEN_MAX 256
-#endif
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 32
-#endif
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
 /* \param content The data contained in the element.
    \param next The next element’s address or NULL if it’s the last element.*/
@@ -31,9 +31,11 @@ typedef struct s_list
 	struct s_list	*next;
 }		t_list;
 
-/* \brief the ft_atohex function translates a string of a hexadecimal number to an integer */
+/* \brief the ft_atohex function translates a string of a hexadecimal number to 
+an integer */
 int		ft_atohex(const char *nptr);
-/* \brief the ft_atoi function translates a string of a decimal number to an integer */
+/* \brief the ft_atoi function translates a string of a decimal number to an 
+integer */
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

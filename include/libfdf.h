@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/12 12:23:40 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:08:49 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ typedef struct s_angle {
 	float	tan;
 }				t_angle;
 
-typedef struct	s_wireframe
+typedef struct s_wireframe
 {
 	int		width;
 	int		height;
 	t_point	**z_grid;
+	t_point	position;
+	t_point	center;
+	int		z_scale;
 	int		zoom;
 	t_angle	angle;
 	t_angle	rotation_x;
 	t_angle	rotation_y;
 	t_angle	rotation_z;
-	int		z_scale;
-	t_point	position;
-	t_point	center;
 	void	*mlx_ptr;
 	void	*win_ptr;
 }				t_wireframe;
@@ -78,6 +78,7 @@ typedef struct s_bresenham {
 t_point	point(float x, float y, float z, int color);
 // Create new angle
 t_angle	angle(double deg);
+void	isometric_projection(t_wireframe *data);
 // Read fdf file and write data to matrix
 void	read_wireframe(t_wireframe *data, char *file_name);
 void	set_right_direction(float *x1, float *y1, float *x2, float *y2);
@@ -87,8 +88,14 @@ t_color	get_color_gradient(t_point bgn, t_point end);
 void	bresenham(t_point bgn, t_point end, t_wireframe *data);
 // Function for straight lines
 void	strline(t_point bgn, t_point end, t_wireframe *data);
+int		deal_key(int key, t_wireframe *data);
 // Draw wireframe
 void	draw(t_wireframe *data);
+void	tridimensional(t_point *point, t_wireframe *data);
+void	rotation_z(t_point *point, t_wireframe *data);
+void	rotation_y(t_point *point, t_wireframe *data);
+void	rotation_x(t_point *point, t_wireframe *data);
+void	isometric_projection(t_wireframe *data);
 void	shutdown(t_wireframe *data);
 
 #endif

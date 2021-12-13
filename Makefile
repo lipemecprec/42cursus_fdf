@@ -1,6 +1,6 @@
 NAME = fdf
 CC = gcc
-# FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 LIB_FLAGS = -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -g
 INCLUDE = -Iinclude
@@ -9,7 +9,9 @@ LIBS = include/*.h libft/libft.a mlx_linux/libmlx.a
 SRCS_PATH = ./srcs
 SRCS = main.c \
 		$(SRCS_PATH)/constructors.c \
+		$(SRCS_PATH)/draw_3d.c \
 		$(SRCS_PATH)/draw.c \
+		$(SRCS_PATH)/keys.c \
 		$(SRCS_PATH)/line_utils.c \
 		$(SRCS_PATH)/line.c \
 		$(SRCS_PATH)/read_wireframe.c \

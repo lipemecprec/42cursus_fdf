@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:15:09 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/11 22:37:19 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:07:51 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_color	color(int value)
 {
 	t_color	color;
 
-	color.r = value / pow(256,2);
+	color.r = value / pow(256, 2);
 	color.g = (value / 256) % 256;
 	color.b = value % 256;
 	color.value = value;

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:42:07 by faguilar          #+#    #+#             */
-/*   Updated: 2021/11/27 22:54:53 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:51:22 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,26 @@ enum e_keys{
 	KEY_PLUS=61,
 	KEY_MINUS=45,
 	KEY_SPACE=32,
-	KEY_Z=122,
-	KEY_X=120,
-	KEY_P=112,
-	KEY_I=105,
-	KEY_O=111,
-	KEY_L=108,
-	KEY_R=114,
 	KEY_A=97,
-	KEY_S=115,
 	KEY_D=100,
-	KEY_Q=113,
-	KEY_W=119,
 	KEY_E=101,
+	KEY_H=104,
+	KEY_I=105,
+	KEY_J=106,
+	KEY_K=107,
+	KEY_L=108,
+	KEY_M=109,
+	KEY_N=110,
+	KEY_O=111,
+	KEY_P=112,
+	KEY_Q=113,
+	KEY_R=114,
+	KEY_S=115,
+	KEY_U=172,
+	KEY_W=119,
+	KEY_X=120,
+	KEY_Y=121,
+	KEY_Z=122,
 	KEY_ESC=65307,
 };
 
