@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 23:36:18 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/13 18:08:13 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:46:56 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ t_color	get_color_gradient(t_point bgn, t_point end)
 
 int	add_color_step(int bgn, t_color step)
 {
-	bgn += step.r_step * pow(256, 2);
-	bgn += step.g_step * 256;
+	bgn += step.r_step;
+	bgn += step.g_step;
 	bgn += step.b_step;
 	return (bgn);
 }

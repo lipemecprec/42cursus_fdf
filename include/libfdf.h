@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/13 18:08:49 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:56:36 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	rotation_z(t_point *point, t_wireframe *data);
 void	rotation_y(t_point *point, t_wireframe *data);
 void	rotation_x(t_point *point, t_wireframe *data);
 void	isometric_projection(t_wireframe *data);
-void	shutdown(t_wireframe *data);
+void	shutdown(t_wireframe *data, int code);
 
 #endif
