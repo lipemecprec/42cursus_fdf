@@ -6,17 +6,17 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/11 00:37:05 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:54:57 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-static int	ft_wordcount(char const *s, char c)
+static size_t	ft_wordcount(char const *s, char c)
 {
-	int	i;
-	int	size;
-	int	words;
+	size_t	i;
+	size_t	size;
+	size_t	words;
 
 	i = 0;
 	words = 0;
@@ -31,10 +31,10 @@ static int	ft_wordcount(char const *s, char c)
 				size = 0;
 			}
 		}
-		else
+		else if(ft_isalnum(s[i]))
 			size++;
 		if (s[i] == '\0')
-			break ;
+			break;
 		i++;
 	}
 	return (words);
@@ -94,7 +94,7 @@ static void	write_data(t_point *z_data, char *line)
 		z_data[i].color = WHITE;
 		color = ft_strrchr(nums[i], ',');
 		if (color)
-			z_data[i].color = ft_atohex(color + 1);
+			z_data[i].color = ft_atohex(color);
 		else if (z_data[i].z != 0)
 			z_data[i].color = PINK;
 		nums[i] = NULL;
@@ -112,6 +112,11 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 
 	data->height = count_row(file_name);
 	data->width = count_col(file_name);
+	ft_putstr_fd("Height: ", 1);
+	ft_putnbr_fd(data->height, 1);
+	ft_putstr_fd("\tWidth: ", 1);
+	ft_putnbr_fd(data->width, 1);
+	ft_putstr_fd("\n", 1);
 	data->z_grid = (t_point **)malloc(sizeof(t_point *) * (data->height + 1));
 	i = 0;
 	while (i <= data->height)
