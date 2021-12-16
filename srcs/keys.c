@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:17:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/13 17:40:54 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:56:03 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ static void	key_rotation(int key, t_wireframe *data)
 		data->rotation_x = angle(data->rotation_x.deg - 5);
 	else if (key == KEY_I)
 		isometric_projection(data);
-	else if (key == KEY_O)
-		top_projection(data);
-	else if (key == KEY_P)
-		side_projection(data);
 }
 
 int	deal_key(int key, t_wireframe *data)
@@ -67,7 +63,7 @@ int	deal_key(int key, t_wireframe *data)
 	else if (KEY_H <= key && key <= KEY_P)
 		key_rotation(key, data);
 	else if (key == KEY_ESC)
-		shutdown(data);
+		shutdown(data, 0);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw(data);
 	return (0);
