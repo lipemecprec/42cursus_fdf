@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 17:15:31 by faguilar          #+#    #+#             */
-/*   Updated: 2021/08/27 05:24:08 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:09:40 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ char	**ft_split(char const *s, char c)
 	if (!split)
 		return (NULL);
 	split = ft_wordalloc(s, c, split, slen);
-	split[words] = 0;
+	split[words] = NULL;
 	return (split);
 }
