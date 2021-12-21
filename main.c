@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/16 17:13:39 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/21 13:50:01 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_window(t_wireframe *data, char *file_name)
 	title = ft_strjoin("FDF - ", file_name);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, title);
+	free(title);
 	isometric_projection(data);
 	size = data->width + data->height;
 	data->zoom = (SCR_HEIGHT * 1) / (size * data->angle.cos);
@@ -48,22 +49,30 @@ void	init_window(t_wireframe *data, char *file_name)
 		SCR_HEIGHT * 0.1, 0, 0);
 }
 
+static int	exposure(t_wireframe *data)
+{
+	draw(data);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_wireframe	*data;
 
 	if (argc != 2)
-		return (0);
-	data = (t_wireframe *)malloc(sizeof(t_wireframe));
+		shutdown(NULL, 1);
+	data = malloc(sizeof(t_wireframe));
+	if (!data)
+		shutdown(NULL, 2);
 	read_wireframe(data, argv[1]);
-	ft_print_data(data); // debug
+	// ft_print_data(data); // debug
 	init_window(data, argv[1]);
 	draw(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
-	// mlx_expose_hook(data->win_ptr, deal_key, data);
-	// sleep(5);
-	// mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_expose_hook(data->win_ptr, exposure, data);
 	mlx_loop(data->mlx_ptr);
-	free(data);
-	return (0);
+	// // mlx_destroy_display(data->mlx_ptr);
+	// set_free(data->mlx_ptr);
+	// set_free(data);
+	// return (0);
 }

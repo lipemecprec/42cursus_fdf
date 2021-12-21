@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:17:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/16 16:56:03 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:49:58 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,18 @@ static void	key_rotation(int key, t_wireframe *data)
 
 int	deal_key(int key, t_wireframe *data)
 {
-	if (KEY_LEFT <= key && key <= KEY_DOWN)
-		key_move(key, data);
-	else if (key == KEY_W || key == KEY_S || key == KEY_Z || key == KEY_X)
-		key_scale(key, data);
-	else if (KEY_H <= key && key <= KEY_P)
-		key_rotation(key, data);
-	else if (key == KEY_ESC)
+	if (key == KEY_ESC)
 		shutdown(data, 0);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	draw(data);
+	else
+	{
+		if (KEY_LEFT <= key && key <= KEY_DOWN)
+			key_move(key, data);
+		else if (key == KEY_W || key == KEY_S || key == KEY_Z || key == KEY_X)
+			key_scale(key, data);
+		else if (KEY_H <= key && key <= KEY_P)
+			key_rotation(key, data);
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		draw(data);
+	}
 	return (0);
 }

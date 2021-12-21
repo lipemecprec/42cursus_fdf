@@ -1,6 +1,6 @@
 NAME = fdf
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+# FLAGS = -Wall -Wextra -Werror
 
 LIB_FLAGS = -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -g
 INCLUDE = -Iinclude

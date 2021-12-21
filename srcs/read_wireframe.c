@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/16 17:54:57 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/21 09:42:04 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ static int	count_row(char *file_name)
 	line = get_next_line(fd);
 	while (line)
 	{
-		free(line);
+		set_free(line);
 		line = get_next_line(fd);
 		row++;
 	}
+	set_free(line);
 	close(fd);
 	return (row);
 }
@@ -64,17 +65,19 @@ static int	count_col(char *file_name)
 	int		col;
 	int		fd;
 	char	*line;
+	char	*temp;
 
 	fd = open(file_name, O_RDONLY, 1);
-	line = get_next_line(fd);
-	line = ft_strtrim(line, " ");
+	temp = get_next_line(fd);
+	line = ft_strtrim(temp, " ");
+	free (temp);
 	col = ft_wordcount(line, ' ');
 	while (line)
 	{
-		free(line);
+		set_free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	set_free(line);
 	close(fd);
 	return (col);
 }
@@ -84,9 +87,11 @@ static void	write_data(t_point *z_data, char *line)
 	char	**nums;
 	int		i;
 	char	*color;
+	char	*temp;
 
-	line = ft_strtrim(line, " \n");
-	nums = ft_split(line, ' ');
+	temp = ft_strtrim(line, " \n");
+	nums = ft_split(temp, ' ');
+	set_free(temp);
 	i = 0;
 	while (nums[i])
 	{
@@ -97,11 +102,10 @@ static void	write_data(t_point *z_data, char *line)
 			z_data[i].color = ft_atohex(color);
 		else if (z_data[i].z != 0)
 			z_data[i].color = PINK;
-		nums[i] = NULL;
-		free(nums[i]);
+		set_free(nums[i]);
 		i++;
 	}
-	free(nums);
+	set_free(nums);
 }
 
 void	read_wireframe(t_wireframe *data, char *file_name)
@@ -112,26 +116,20 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 
 	data->height = count_row(file_name);
 	data->width = count_col(file_name);
-	ft_putstr_fd("Height: ", 1);
-	ft_putnbr_fd(data->height, 1);
-	ft_putstr_fd("\tWidth: ", 1);
-	ft_putnbr_fd(data->width, 1);
-	ft_putstr_fd("\n", 1);
-	data->z_grid = (t_point **)malloc(sizeof(t_point *) * (data->height + 1));
+	data->z_grid = (t_point **)malloc(sizeof(data->z_grid) * (data->height));
 	i = 0;
-	while (i <= data->height)
+	while (i < data->height)
 		data->z_grid[i++] = \
-			(t_point *)malloc(sizeof(t_point) * (data->width + 1));
+			(t_point *)malloc(sizeof(t_point) * (data->width));
 	fd = open(file_name, O_RDONLY);
-	i = -1;
+	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		write_data(data->z_grid[++i], line);
-		free(line);
+		write_data(data->z_grid[i++], line);
+		set_free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
-	data->z_grid[data->height] = NULL;
+	set_free(line);
 	close (fd);
 }
