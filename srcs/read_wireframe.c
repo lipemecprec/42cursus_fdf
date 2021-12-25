@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/21 09:42:04 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/25 04:09:41 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static int	count_row(char *file_name)
 	line = get_next_line(fd);
 	while (line)
 	{
-		set_free(line);
+		free(line);
 		line = get_next_line(fd);
 		row++;
 	}
-	set_free(line);
+	free(line);
 	close(fd);
 	return (row);
 }
@@ -74,10 +74,10 @@ static int	count_col(char *file_name)
 	col = ft_wordcount(line, ' ');
 	while (line)
 	{
-		set_free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	set_free(line);
+	free(line);
 	close(fd);
 	return (col);
 }
@@ -91,7 +91,7 @@ static void	write_data(t_point *z_data, char *line)
 
 	temp = ft_strtrim(line, " \n");
 	nums = ft_split(temp, ' ');
-	set_free(temp);
+	free(temp);
 	i = 0;
 	while (nums[i])
 	{
@@ -102,10 +102,10 @@ static void	write_data(t_point *z_data, char *line)
 			z_data[i].color = ft_atohex(color);
 		else if (z_data[i].z != 0)
 			z_data[i].color = PINK;
-		set_free(nums[i]);
+		free(nums[i]);
 		i++;
 	}
-	set_free(nums);
+	free(nums);
 }
 
 void	read_wireframe(t_wireframe *data, char *file_name)
@@ -127,9 +127,9 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 	while (line)
 	{
 		write_data(data->z_grid[i++], line);
-		set_free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	set_free(line);
+	free(line);
 	close (fd);
 }

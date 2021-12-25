@@ -1,6 +1,6 @@
 NAME = libft.a
 
-CC = clang
+CC = gcc
 FLAGS = -Wall -Wextra -Werror -fPIE
 RM = rm -f
 LIB = libft.h
