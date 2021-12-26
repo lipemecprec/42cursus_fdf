@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/25 04:09:45 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/26 17:50:33 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_wireframe
 	t_angle	rotation_z;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		up;
 }				t_wireframe;
 
 typedef struct s_bresenham {
@@ -96,8 +97,8 @@ void	rotation_z(t_point *point, t_wireframe *data);
 void	rotation_y(t_point *point, t_wireframe *data);
 void	rotation_x(t_point *point, t_wireframe *data);
 void	isometric_projection(t_wireframe *data);
-void	shutdown(t_wireframe *data, int code);
-void	free(void *ptr);
+void	farewell(t_wireframe *data, int code);
+void	set_free(void *ptr);
 void	free_wireframe_data(t_wireframe *data);
 
 #endif

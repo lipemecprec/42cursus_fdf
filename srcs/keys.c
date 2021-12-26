@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:17:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/25 04:05:27 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/26 17:50:30 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	key_rotation(int key, t_wireframe *data)
 int	deal_key(int key, t_wireframe *data)
 {
 	if (key == KEY_ESC)
-		shutdown(data, 0);
+		farewell(data, 0);
 	else
 	{
 		if (KEY_LEFT <= key && key <= KEY_DOWN)

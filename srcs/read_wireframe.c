@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/25 04:09:41 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/26 17:50:36 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,7 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 	data->z_grid = (t_point **)malloc(sizeof(data->z_grid) * (data->height));
 	i = 0;
 	while (i < data->height)
-		data->z_grid[i++] = \
-			(t_point *)malloc(sizeof(t_point) * (data->width));
+		data->z_grid[i++] = (t_point *)malloc(sizeof(t_point) * (data->width));
 	fd = open(file_name, O_RDONLY);
 	i = 0;
 	line = get_next_line(fd);
