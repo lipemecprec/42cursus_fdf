@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:47:42 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/12 12:31:15 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:27:30 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 {
 	t_bresenham	b;
 	t_color		gradient;
+	t_color		bgn_c;
 
 	b.axis = 'x';
 	calc_bresenham(bgn, end, &b);
 	gradient = get_color_gradient(bgn, end);
+	bgn_c = color(bgn.color);
 	while (bgn.x++ <= end.x)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
-		bgn.color = add_color_step(bgn.color, gradient);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn_c.value);
+		add_color_step(&bgn_c, gradient);
 		if (b.pz > 0)
 		{
 			b.pz = b.pz - b.ddx + b.ddy;
@@ -54,14 +56,16 @@ static void	bresenham_y(t_point bgn, t_point end, t_wireframe *data)
 {
 	t_bresenham	b;
 	t_color		gradient;
+	t_color		bgn_c;
 
 	b.axis = 'y';
 	calc_bresenham(bgn, end, &b);
 	gradient = get_color_gradient(bgn, end);
+	bgn_c = color(bgn.color);
 	while (bgn.y++ <= end.y)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn.color);
-		bgn.color = add_color_step(bgn.color, gradient);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn_c.value);
+		add_color_step(&bgn_c, gradient);
 		if (b.pz > 0)
 		{
 			b.pz = b.pz - b.ddy + b.ddx;
@@ -76,18 +80,12 @@ void	bresenham(t_point bgn, t_point end, t_wireframe *data)
 {
 	if (fabs(bgn.x - end.x) >= fabs(bgn.y - end.y))
 	{
-		set_right_direction(&bgn.x, &bgn.y, &end.x, &end.y);
-		if (bgn.y == end.y)
-			strline(bgn, end, data);
-		else
-			bresenham_x(bgn, end, data);
+		set_right_direction(&bgn, &end);
+		bresenham_x(bgn, end, data);
 	}
 	else
 	{
-		set_down_direction(&bgn.x, &bgn.y, &end.x, &end.y);
-		if (bgn.x == end.x)
-			strline(bgn, end, data);
-		else
-			bresenham_y(bgn, end, data);
+		set_down_direction(&bgn, &end);
+		bresenham_y(bgn, end, data);
 	}
 }

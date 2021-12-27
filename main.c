@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/26 17:50:26 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 10:51:49 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_wireframe	*init_wireframe(char *file_name)
 	char		*title;
 	int			size;
 
-	data = malloc(sizeof(t_wireframe));
+	data = mgrant(sizeof(t_wireframe));
 	read_wireframe(data, file_name);
 	title = ft_strjoin("FDF - ", file_name);
 	data->mlx_ptr = mlx_init();
@@ -50,15 +50,15 @@ static t_wireframe	*init_wireframe(char *file_name)
 	data->center = point(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0, 0);
 	data->position = point(SCR_WIDTH * data->height / size, \
 		SCR_HEIGHT * 0.1, 0, 0);
-	data->up = 1;
 	return (data);
 }
 
-static int	exposure(t_wireframe *data)
-{
-	draw(data);
-	return (0);
-}
+// static int	exposure(t_wireframe *data)
+// {
+// 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+// 	draw(data);
+// 	return (0);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -67,9 +67,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		farewell(NULL, 1);
 	data = init_wireframe(argv[1]);
-	ft_print_data(data); // debug
 	draw(data);
 	mlx_key_hook(data->win_ptr, &deal_key, data);
-	mlx_expose_hook(data->win_ptr, &exposure, data);
+	// mlx_expose_hook(data->win_ptr, &exposure, data);
 	mlx_loop(data->mlx_ptr);
 }

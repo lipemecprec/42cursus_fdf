@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:15:09 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/18 18:01:11 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:18:09 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ t_color	color(int value)
 {
 	t_color	color;
 
-	color.r = value & 0xFF0000;
-	color.g = value & 0x00FF00;
+	color.r = (value & 0xFF0000) >> 16;
+	color.g = (value & 0x00FF00) >> 8;
 	color.b = value & 0x0000FF;
+	color.r_step = color.r;
+	color.g_step = color.g;
+	color.b_step = color.b;
 	color.value = value;
 	return (color);
 }

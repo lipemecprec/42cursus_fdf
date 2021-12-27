@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/26 17:50:36 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 09:38:07 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static int	count_row(char *file_name)
 	line = get_next_line(fd);
 	while (line)
 	{
-		free(line);
+		set_free(line);
 		line = get_next_line(fd);
 		row++;
 	}
-	free(line);
+	set_free(line);
 	close(fd);
 	return (row);
 }
@@ -70,14 +70,14 @@ static int	count_col(char *file_name)
 	fd = open(file_name, O_RDONLY, 1);
 	temp = get_next_line(fd);
 	line = ft_strtrim(temp, " ");
-	free (temp);
+	set_free (temp);
 	col = ft_wordcount(line, ' ');
 	while (line)
 	{
-		free(line);
+		set_free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	set_free(line);
 	close(fd);
 	return (col);
 }
@@ -91,7 +91,7 @@ static void	write_data(t_point *z_data, char *line)
 
 	temp = ft_strtrim(line, " \n");
 	nums = ft_split(temp, ' ');
-	free(temp);
+	set_free(temp);
 	i = 0;
 	while (nums[i])
 	{
@@ -102,10 +102,10 @@ static void	write_data(t_point *z_data, char *line)
 			z_data[i].color = ft_atohex(color);
 		else if (z_data[i].z != 0)
 			z_data[i].color = PINK;
-		free(nums[i]);
+		set_free(nums[i]);
 		i++;
 	}
-	free(nums);
+	set_free(nums);
 }
 
 void	read_wireframe(t_wireframe *data, char *file_name)
@@ -116,19 +116,19 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 
 	data->height = count_row(file_name);
 	data->width = count_col(file_name);
-	data->z_grid = (t_point **)malloc(sizeof(data->z_grid) * (data->height));
+	data->z_grid = (t_point **)mgrant(sizeof(data->z_grid) * (data->height));
 	i = 0;
 	while (i < data->height)
-		data->z_grid[i++] = (t_point *)malloc(sizeof(t_point) * (data->width));
+		data->z_grid[i++] = (t_point *)mgrant(sizeof(t_point) * (data->width));
 	fd = open(file_name, O_RDONLY);
 	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		write_data(data->z_grid[i++], line);
-		free(line);
+		set_free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	set_free(line);
 	close (fd);
 }
