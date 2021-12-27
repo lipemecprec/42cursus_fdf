@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:20:18 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/13 17:50:49 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 16:50:03 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,4 @@ void	rotation_z(t_point *point, t_wireframe *data)
 	sin = data->rotation_z.sin;
 	point->x = (cos * x + sin * y) + data->center.x;
 	point->y = (-sin * x + cos * y) + data->center.y;
-}
-
-void	rotation_y(t_point *point, t_wireframe *data)
-{
-	float	x;
-	float	cos;
-
-	x = point->x - data->center.x;
-	cos = data->rotation_y.cos;
-	point->x = (cos * x) + data->center.x;
-}
-
-void	rotation_x(t_point *point, t_wireframe *data)
-{
-	float	y;
-	float	cos;
-
-	y = point->y - data->center.y;
-	cos = data->rotation_x.cos;
-	point->y = (cos * y) + data->center.y;
 }

@@ -16,7 +16,6 @@ SRCS = main.c \
 		$(SRCS_PATH)/line.c \
 		$(SRCS_PATH)/read_wireframe.c \
 		$(SRCS_PATH)/shutdown.c \
-		$(SRCS_PATH)/strline.c \
 		$(SRCS_PATH)/utils.c \
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/18 18:11:12 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 16:50:26 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_point	proj(int x, int y, t_wireframe *data)
 	point.y = y * data->zoom;
 	point.z = data->z_grid[(int)y][(int)x].z;
 	point.color = data->z_grid[(int)y][(int)x].color;
-	rotation_x(&point, data);
-	rotation_y(&point, data);
 	rotation_z(&point, data);
 	tridimensional(&point, data);
 	translate(&point, data);

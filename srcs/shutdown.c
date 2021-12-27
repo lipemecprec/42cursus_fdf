@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 21:27:22 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 09:56:08 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 17:41:51 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_wireframe_data(t_wireframe *data)
 	free(data->z_grid);
 }
 
-static void message(int code)
+static void	message(int code)
 {
 	if (code == 0)
 		ft_putstr_fd("\033[0;36mFDF exited.\033\n", 1);
@@ -31,12 +31,12 @@ static void message(int code)
 	else if (code == 2)
 		ft_putstr_fd("\033[0;31mError - Out of Memory.\033\n", 1);
 	else if (code == 3)
-		ft_putstr_fd("\033[0;31mError - Wrong file format\033\n", 1);
+		ft_putstr_fd("\033[0;31mError - Could not open file\033\n", 1);
 }
 
 void	farewell(t_wireframe *data, int code)
 {
-	if(data)
+	if (data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_display(data->mlx_ptr);

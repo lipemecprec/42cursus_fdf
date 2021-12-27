@@ -6,13 +6,13 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 10:51:49 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 17:39:29 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-static void ft_print_data(t_wireframe *data)
+static void	ft_print_data(t_wireframe *data)
 {
 	int	i;
 	int	j;
@@ -71,4 +71,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data->win_ptr, &deal_key, data);
 	// mlx_expose_hook(data->win_ptr, &exposure, data);
 	mlx_loop(data->mlx_ptr);
+	return (0);
 }

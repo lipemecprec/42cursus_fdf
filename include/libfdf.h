@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 15:26:34 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/27 16:22:13 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	isometric_projection(t_wireframe *data);
 void	*mgrant(int size);
 void	farewell(t_wireframe *data, int code);
 void	set_free(void *ptr);
+int		open_file(char *file_name);
 void	free_wireframe_data(t_wireframe *data);
 
 #endif
