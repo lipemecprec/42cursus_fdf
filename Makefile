@@ -7,7 +7,7 @@ INCLUDE = -Iinclude -Imlx_linux
 LIBS = include/*.h libft/libft.a mlx_linux/libmlx.a
 
 SRCS_PATH = ./srcs
-SRCS = main.c \
+SRCS = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/constructors.c \
 		$(SRCS_PATH)/draw_3d.c \
 		$(SRCS_PATH)/draw.c \
@@ -28,8 +28,8 @@ $(LIBS):
 	make -C mlx_linux
 
 clean:
-	@make -C libft/ clean
-	@make -C mlx_linux/ clean
+	make -C libft/ clean
+	make -C mlx_linux/ clean
 	rm -rf $(OBJS)
 
 fclean: clean
