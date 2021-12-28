@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 21:27:22 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 17:41:51 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:07:07 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void	free_wireframe_data(t_wireframe *data)
 static void	message(int code)
 {
 	if (code == 0)
-		ft_putstr_fd("\033[0;36mFDF exited.\033\n", 1);
+		ft_putstr_fd("\033[0;36mFDF exited.\033[00m\n", 1);
 	else if (code == 1)
-		ft_putstr_fd("\033[0;31mError - Wrong number of arguments.\033\n", 1);
+		ft_putstr_fd \
+		("\033[0;31mError - Wrong number of arguments.\033[00m\n", 1);
 	else if (code == 2)
-		ft_putstr_fd("\033[0;31mError - Out of Memory.\033\n", 1);
+		ft_putstr_fd("\033[0;31mError - Out of Memory.\033[00m\n", 1);
 	else if (code == 3)
-		ft_putstr_fd("\033[0;31mError - Could not open file\033\n", 1);
+		ft_putstr_fd("\033[0;31mError - Could not open file\033[00m\n", 1);
 }
 
 void	farewell(t_wireframe *data, int code)

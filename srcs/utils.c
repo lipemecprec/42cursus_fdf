@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:07:33 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 17:42:09 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 09:40:37 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*mgrant(int size)
 		farewell(NULL, 2);
 	else
 		return (memory_alloc);
+	return (NULL);
 }
 
 void	set_free(void *ptr)

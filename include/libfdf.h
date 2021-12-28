@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 16:22:13 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:24:53 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <fcntl.h>  // open
 # include <unistd.h> // read, write, close
 # include <stdlib.h> // malloc, free, exit
-# include <stdio.h> // perror
-# include <string.h> // strerror
 
 # include "../libft/libft.h"
 # include "colors.h"
@@ -85,12 +83,12 @@ typedef struct s_color
 	int		value;
 }		t_color;
 
-t_color	color(int value);
-
 // Create new point
 t_point	point(float x, float y, float z, int color);
-// Create new angle
+// Create new angle and calculates sin, cos, tan
 t_angle	angle(double deg);
+// Split a color integer into RGB
+t_color	color(int value);
 void	isometric_projection(t_wireframe *data);
 // Read fdf file and write data to matrix
 void	read_wireframe(t_wireframe *data, char *file_name);

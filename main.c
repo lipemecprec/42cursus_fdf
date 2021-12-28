@@ -6,30 +6,11 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 17:39:29 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:23:14 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
-
-static void	ft_print_data(t_wireframe *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->height)
-	{
-		j = 0;
-		while (j < data->width)
-		{
-			printf("%3d", data->z_grid[i][j].z);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
 
 static t_wireframe	*init_wireframe(char *file_name)
 {
@@ -53,12 +34,30 @@ static t_wireframe	*init_wireframe(char *file_name)
 	return (data);
 }
 
-// static int	exposure(t_wireframe *data)
-// {
-// 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-// 	draw(data);
-// 	return (0);
-// }
+static void	check_file(char *file_name)
+{
+	int		fd;
+	char	*line;
+	
+	fd = open_file(file_name);
+	line = get_next_line(fd);
+	if (!line)
+		farewell(NULL, 3);
+	while (line)
+	{
+		set_free(line);
+		line = get_next_line(fd);
+	}
+	set_free(line);
+	close(fd);
+}
+
+static int	exposure(t_wireframe *data)
+{
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	draw(data);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -66,10 +65,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		farewell(NULL, 1);
+	check_file(argv[1]);
 	data = init_wireframe(argv[1]);
-	draw(data);
 	mlx_key_hook(data->win_ptr, &deal_key, data);
-	// mlx_expose_hook(data->win_ptr, &exposure, data);
+	mlx_expose_hook(data->win_ptr, &exposure, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }

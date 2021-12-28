@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:17:43 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 17:41:21 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:24:00 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void	read_wireframe(t_wireframe *data, char *file_name)
 
 	fd = open_file(file_name);
 	line = get_next_line(fd);
-	if (!line)
-		farewell(NULL, 3);
 	data->height = count_row(file_name);
 	data->width = count_col(file_name);
 	data->z_grid = (t_point **)mgrant(sizeof(data->z_grid) * (data->height));
