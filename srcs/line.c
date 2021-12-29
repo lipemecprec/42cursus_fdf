@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:47:42 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 15:27:30 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/28 16:04:23 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	bresenham_x(t_point bgn, t_point end, t_wireframe *data)
 	bgn_c = color(bgn.color);
 	while (bgn.x++ <= end.x)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn_c.value);
+		ft_pixel_put(&data->img, bgn.x, bgn.y, bgn_c.value);
 		add_color_step(&bgn_c, gradient);
 		if (b.pz > 0)
 		{
@@ -64,7 +64,7 @@ static void	bresenham_y(t_point bgn, t_point end, t_wireframe *data)
 	bgn_c = color(bgn.color);
 	while (bgn.y++ <= end.y)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, bgn.x, bgn.y, bgn_c.value);
+		ft_pixel_put(&data->img, bgn.x, bgn.y, bgn_c.value);
 		add_color_step(&bgn_c, gradient);
 		if (b.pz > 0)
 		{

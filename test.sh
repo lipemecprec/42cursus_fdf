@@ -22,8 +22,8 @@
 # ./fdf test_maps/color-test.fdf
 # echo elem
 # ./fdf test_maps/elem.fdf
-# echo julia
-# ./fdf test_maps/julia.fdf
+echo julia
+./fdf test_maps/julia.fdf
 # echo plat
 # ./fdf test_maps/plat.fdf
 # echo pyra

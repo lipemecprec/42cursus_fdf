@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 23:36:18 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/28 09:36:01 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 18:15:57 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,24 @@ void	add_color_step(t_color *bgn, t_color step)
 	bgn->g = bgn->g_step;
 	bgn->b = bgn->b_step;
 	bgn->value = bgn->r << 16 | bgn->g << 8 | bgn->b;
+}
+
+void	ft_pixel_put(t_image *img, int x, int y, int color)
+{
+	char	*dst;
+	int		img_x;
+	int		img_y;
+	int		offset;
+
+	img_x = x * (img->bits_per_pixel / 8);
+	img_y = y * img->line_lenght;
+	if (0 < img_x && img_x < img->line_lenght)
+	{
+		if (0 < img_y && img_y < img->line_lenght * SCR_HEIGHT)
+		{
+			offset = img_x + img_y;
+			dst = img->addr + offset;
+			*(unsigned int *)dst = color;
+		}
+	}
 }

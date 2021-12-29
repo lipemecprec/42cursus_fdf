@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/28 10:23:14 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 18:16:16 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ static t_wireframe	*init_wireframe(char *file_name)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, title);
 	free(title);
+	data->img.img = mlx_new_image(data->mlx_ptr, SCR_WIDTH, SCR_HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img, \
+	&data->img.bits_per_pixel, &data->img.line_lenght, &data->img.endian);
 	isometric_projection(data);
 	size = data->width + data->height;
-	data->zoom = (SCR_HEIGHT * 1) / (size * data->angle.cos);
-	data->z_scale = 2;
-	data->center = point(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0, 0);
+	data->zoom = (SCR_HEIGHT) / (size * data->angle.cos);
+	data->z_scale = 0.1;
+	data->center = point(data->width / 2, data->height / 2, 0, 0);
 	data->position = point(SCR_WIDTH * data->height / size, \
 		SCR_HEIGHT * 0.1, 0, 0);
 	return (data);
@@ -38,7 +41,7 @@ static void	check_file(char *file_name)
 {
 	int		fd;
 	char	*line;
-	
+
 	fd = open_file(file_name);
 	line = get_next_line(fd);
 	if (!line)

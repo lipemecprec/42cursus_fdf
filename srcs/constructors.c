@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:15:09 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 15:18:09 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 18:04:42 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ t_color	color(int value)
 	color.b_step = color.b;
 	color.value = value;
 	return (color);
+}
+
+void	isometric_projection(t_wireframe *data)
+{
+	data->angle = angle(60);
+	data->rotation_z = angle(0);
 }

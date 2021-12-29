@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:17:11 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 17:40:15 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 18:15:04 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ static void	key_move(int key, t_wireframe *data)
 
 static void	key_scale(int key, t_wireframe *data)
 {
+	float	zoom_factor;
+
+	zoom_factor = (float)256 / data->width;
 	if (key == KEY_W)
-		data->zoom += 3;
+		data->zoom += zoom_factor;
 	else if (key == KEY_S)
-		data->zoom -= 3;
+		data->zoom -= zoom_factor;
 	else if (key == KEY_Z)
-		data->z_scale += 1;
+		data->z_scale += 0.1;
 	else if (key == KEY_X)
-		data->z_scale -= 1;
+		data->z_scale -= 0.1;
+	if (data->zoom < 1)
+		data->zoom = 1;
 }
 
 static void	key_rotation(int key, t_wireframe *data)
@@ -48,9 +53,6 @@ static void	key_rotation(int key, t_wireframe *data)
 
 int	deal_key(int key, t_wireframe *data)
 {
-	int	update;
-
-	update = 1;
 	if (key == KEY_ESC)
 		farewell(data, 0);
 	else if (KEY_LEFT <= key && key <= KEY_DOWN)
@@ -59,12 +61,9 @@ int	deal_key(int key, t_wireframe *data)
 		key_scale(key, data);
 	else if (key == KEY_A || key == KEY_D || key == KEY_I)
 		key_rotation(key, data);
-	else
-		update = 0;
-	if (update == 1)
-	{
-		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		draw(data);
-	}
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	draw(data);
+	if (key == KEY_H)
+		menu_show(data);
 	return (0);
 }

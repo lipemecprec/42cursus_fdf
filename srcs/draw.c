@@ -6,30 +6,34 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 01:36:06 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/27 16:50:26 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 18:14:11 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-void	translate(t_point *point, t_wireframe *data)
+static void	set_img_center(t_wireframe *data)
 {
-	point->x += data->position.x;
-	point->y += data->position.y;
+	data->center.x = (data->width / 2) * data->zoom;
+	data->center.y = (data->height / 2) * data->zoom;
 }
 
-t_point	proj(int x, int y, t_wireframe *data)
+static void	clear_image(t_wireframe *data)
 {
-	t_point	point;
+	int	x;
+	int	y;
 
-	point.x = x * data->zoom;
-	point.y = y * data->zoom;
-	point.z = data->z_grid[(int)y][(int)x].z;
-	point.color = data->z_grid[(int)y][(int)x].color;
-	rotation_z(&point, data);
-	tridimensional(&point, data);
-	translate(&point, data);
-	return (point);
+	x = 0;
+	while (x < SCR_WIDTH)
+	{
+		y = 0;
+		while (y < SCR_HEIGHT)
+		{
+			ft_pixel_put(&data->img, x, y, BG_COLOR);
+			y++;
+		}
+		x++;
+	}
 }
 
 void	draw(t_wireframe *data)
@@ -37,6 +41,8 @@ void	draw(t_wireframe *data)
 	int	x;
 	int	y;
 
+	clear_image(data);
+	set_img_center(data);
 	y = 0;
 	while (y < data->height)
 	{
@@ -51,4 +57,6 @@ void	draw(t_wireframe *data)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
+	menu_title(data);
 }
