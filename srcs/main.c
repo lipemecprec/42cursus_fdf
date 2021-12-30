@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:22:01 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/29 18:16:16 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:40:17 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 		farewell(NULL, 1);
 	check_file(argv[1]);
 	data = init_wireframe(argv[1]);
+	mlx_hook(data->win_ptr, 33, 1L << 17, farewell, data);
 	mlx_key_hook(data->win_ptr, &deal_key, data);
 	mlx_expose_hook(data->win_ptr, &exposure, data);
 	mlx_loop(data->mlx_ptr);

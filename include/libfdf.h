@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:24:44 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/29 18:12:49 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:38:35 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_color
 
 typedef struct s_image
 {
-	void*	img;
-	char*	addr;
+	void	*img;
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
@@ -117,7 +117,7 @@ void	isometric_projection(t_wireframe *data);
 void	menu_title(t_wireframe *data);
 void	menu_show(t_wireframe *data);
 void	*mgrant(int size);
-void	farewell(t_wireframe *data, int code);
+int		farewell(t_wireframe *data, int code);
 void	set_free(void *ptr);
 int		open_file(char *file_name);
 

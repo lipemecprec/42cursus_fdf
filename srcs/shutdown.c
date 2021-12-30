@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 21:27:22 by faguilar          #+#    #+#             */
-/*   Updated: 2021/12/29 18:12:27 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:49:37 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ static void	message(int code)
 		ft_putstr_fd("\033[0;31mError - Out of Memory.\033[00m\n", 1);
 	else if (code == 3)
 		ft_putstr_fd("\033[0;31mError - Could not open file\033[00m\n", 1);
+	else
+		ft_putstr_fd("\033[0;36mFDF closed.\033[00m\n", 1);
 }
 
-void	farewell(t_wireframe *data, int code)
+int	farewell(t_wireframe *data, int code)
 {
 	if (data)
 	{
@@ -48,4 +50,5 @@ void	farewell(t_wireframe *data, int code)
 	}
 	message(code);
 	exit(0);
+	return (0);
 }
